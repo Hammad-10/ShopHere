@@ -49,7 +49,7 @@
     display: inline-block;
     padding: 10px 20px;
     color: white;
-    background-color: rgb(156, 88, 40);
+    background-color: rgb(132, 45, 8);
     border: 2px solid white;
     text-decoration: none;
     font-size: 16px;
@@ -117,18 +117,18 @@
 
 .organicProducts {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
 .product {
-    width: 30%;
+    width: 20%;
     margin: 10px;
     text-align: center;
 }
 
 .productImage {
-    width: 100%;
+    width: 80%;
     height: 50%;
     object-fit: cover;
     margin-bottom: 10px;
@@ -138,9 +138,9 @@
     font-size: 1.5em;
     margin: 10px 0;
     color:white ;
-}
+    text-align: center;}
 
 .productDescription {
-    font-size: 1em;
+    font-size: 0.8em;
     color:white ;
 }
