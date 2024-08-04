@@ -13,6 +13,12 @@
     justify-content: space-between;
 }
 
+#div3 {
+
+    background-color: rgb(152, 90, 45);
+    height: 25%;
+}
+
 #companyName {
     color: white;
     font-weight: bold;
@@ -92,4 +98,44 @@
 
 #brandStoryPara {
     color: brown;
+}
+
+/* Styling for section 3 and 4 */
+
+#div3 {
+    padding: 20px;
+    text-align: center;
+}
+
+#organicSelectionHeading {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.organicProducts {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.product {
+    width: 30%;
+    margin: 10px;
+    text-align: left;
+}
+
+.productImage {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.productTitle {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.productDescription {
+    font-size: 1em;
+    color: #555;
 }
