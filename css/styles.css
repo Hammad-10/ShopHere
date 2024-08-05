@@ -126,6 +126,8 @@
     width: 20%;
     margin: 10px;
     text-align: center;
+    opacity: 0; /* P008d */
+    transition: opacity 2s; /* P008d */
 }
 
 .productImage {
@@ -139,11 +141,16 @@
     font-size: 1.5em;
     margin: 10px 0;
     color:white ;
-    text-align: center;}
+    text-align: center;
+    opacity: 1; /* Pa6a7 */
+    transition: opacity 2s; /* Pa6a7 */
+}
 
 .productDescription {
     font-size: 0.8em;
     color:white ;
+    opacity: 1; /* Pa6a7 */
+    transition: opacity 2s; /* Pa6a7 */
 }
 
 /* Styling for div4 */
@@ -152,6 +159,9 @@
     background-color: rgb(238, 223, 195);
     text-align: center;
     color :rgb(132, 45, 8);
+    position: relative;
+    bottom: 0; /* Pcfe7 */
+    transition: bottom 2s; /* Pcfe7 */
 }
 
 #taglinediv2 {
@@ -174,6 +184,8 @@
     margin-left: 240px;
     position:relative;
     left:0;
+    opacity: 1; /* Pefa5 */
+    transition: opacity 2s; /* Pefa5 */
 }
 
 #contactSection {
@@ -183,7 +195,8 @@
     flex-wrap: wrap;
     position:relative;
     right:0;
-
+    opacity: 1; /* Pefa5 */
+    transition: opacity 2s; /* Pefa5 */
 }
 
 #contactImageDiv {
