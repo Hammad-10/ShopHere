@@ -87,11 +87,15 @@
 
 #brandStoryheading {
     color: brown;
+    position: relative;
+    right: 0;
     
 }
 
 #brandStoryPara {
     color: brown;
+    position: relative;
+    right: 0;
 }
 
 /* Styling for section 3 and 4 */
@@ -108,6 +112,8 @@
     color: white;
     text-align: left;
     margin-left: 100px;
+    position: relative;
+    left: 0;
 }
 
 .organicProducts {
@@ -166,6 +172,8 @@
     margin-bottom: 20px;
     text-align: left;
     margin-left: 240px;
+    position:relative;
+    left:0;
 }
 
 #contactSection {
@@ -173,6 +181,8 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    position:relative;
+    right:0;
 
 }
 
