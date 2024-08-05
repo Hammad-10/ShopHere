@@ -43,7 +43,7 @@
     display: inline-block;
     padding: 10px 20px;
     color: white;
-    background-color: rgb(156, 88, 40);
+    background-color: rgb(132, 45, 8);
     border: 2px solid white;
     text-decoration: none;
     font-size: 16px;
@@ -92,4 +92,119 @@
 
 #brandStoryPara {
     color: brown;
+}
+
+/* Styling for section 3 and 4 */
+
+#div3 {
+    padding: 20px;
+    text-align: center;
+    background-color: rgb(152, 90, 45);
+}
+
+#organicSelectionHeading {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: white;
+    text-align: left;
+    margin-left: 100px;
+}
+
+.organicProducts {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.product {
+    width: 20%;
+    margin: 10px;
+    text-align: center;
+}
+
+.productImage {
+    width: 80%;
+    height: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.productTitle {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color:white ;
+    text-align: center;}
+
+.productDescription {
+    font-size: 0.8em;
+    color:white ;
+}
+
+/* Styling for div4 */
+#div4 {
+    padding: 20px;
+    background-color: rgb(238, 223, 195);
+    text-align: center;
+    color :rgb(132, 45, 8);
+}
+
+#taglinediv2 {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+    
+
+#tagline2 {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+#getInTouchHeading {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: left;
+    margin-left: 240px;
+}
+
+#contactSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+#contactImageDiv {
+    flex: 1 1 300px;
+    text-align: center;
+    
+}
+
+#contactImage {
+    max-width: 350px;
+    height: 300px;
+
+}
+
+#contactDetails {
+    flex: 1 1 300px;
+    text-align: left;
+}
+
+#contactDetails p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    #contactSection {
+        flex-direction: column;
+    }
+
+    #contactDetails {
+        text-align: center;
+    }
 }
