@@ -6,15 +6,18 @@ body {
 .navbar {
     background-color: black;
     padding: 1rem;
-align-items: center;}
+    align-items: center;}
 
 .nav-links {
     list-style: none;    
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: flex-end;
     align-items: right;
     margin: 0;
     padding: 0;
+    right: 0;
+    position: relative;
 }
 
 .nav-links li {
