@@ -221,6 +221,9 @@
     margin: 10px 0;
 }
 
+
+
+
 /* Responsive styling */
 @media (max-width: 768px) {
     #contactSection {
@@ -231,3 +234,5 @@
         text-align: center;
     }
 }
+
+
