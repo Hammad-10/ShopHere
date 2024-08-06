@@ -8,6 +8,7 @@
 
 
 
+
 .product-item {
     text-align: center;
     width: 30%;
@@ -25,18 +26,7 @@
    
 }
 
-.add-to-cart {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 15px;
-    background-color: #28a745;
-    color: white;
-    text-align: center;
-    text-decoration: none; /* Removes underline */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+
 
 .add-to-cart:hover {
     background-color: #218838;
@@ -46,4 +36,9 @@
    height: 250px;
    width: 150px;
 }
+
+#addtoCartBtn{
+    background-color: black;
+    text-decoration: none;
+    }
 
