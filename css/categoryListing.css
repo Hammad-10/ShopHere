@@ -6,10 +6,7 @@
     flex-wrap: wrap;
 }
 
-.product-row {
-    display: flex;
-    justify-content: space-around;
-}
+
 
 .product-item {
     text-align: center;
@@ -49,3 +46,4 @@
    height: 250px;
    width: 150px;
 }
+
