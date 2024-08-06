@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
-    gap: 20px;
+    gap: 10px;
 }
 
 .imageDiv {
@@ -10,10 +10,12 @@
 }
 
 .productImage {
-    width: 40%;
-    height: auto;
-    margin-right: 20px
+    width: 300px;
+    height: 300px;
+    margin-left: 250px
 }
+
+
 
 .productDetails {
     flex: 1;
@@ -47,17 +49,23 @@
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 4px;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    height: auto;
+}
+
+.addToCartButton:hover {
+    background-color: #8caa93;
 }
 
 .socialMediaIcons {
     margin: 20px 0;
+    padding-right: 80 px;
+    
 }
 
-.socialIcon {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-}
 
 .productDetails h3 {
     margin-top: 20px;
@@ -66,4 +74,8 @@
 .productDetails p {
     font-size: 1em;
     color: #555;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    width: 400px;
 }
+
