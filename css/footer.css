@@ -1,0 +1,28 @@
+.footer-dark {
+    background-color: #000; /* Dark black background */
+
+     /* White text color */
+}
+.footer-dark a {
+    color: #ffffff;
+}
+.footer-dark a:hover {
+    color: #f0f0f0;
+}
+.footer-dark .p-4 {
+    background-color: #222; /* Slightly lighter black for the copyright area */
+}
+
+.main 
+
+{
+    margin-top: 5px;
+    color : white;
+}
+
+.endfoot 
+{
+    color : white;
+    background-color: black;
+}
+
