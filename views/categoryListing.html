@@ -1,150 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/categoryListing.css">
-    <link rel="stylesheet" href="../css/miniCart.css"> <!-- Link to your custom CSS file -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="../css/categoryListing.css">
+    <link rel="stylesheet" href="../css/miniCart.css">
     <title>Product Grid</title>
 </head>
-
-<div id="navbar"></div>
-
-
 <body>
+    <div id="navbar"></div>
 
     <div class="product-grid">
-
         <!-- Product 1 -->
-        <a href="" class="product-item">
-            <div>
-                <img class="productImage" src="../assets/Images/BeautyCraftsSources/1.jpg" alt="Product 1">
-                <h3>Hydrating Face Mist</h3>
-                <p>$ 100</p>
-                <!-- <a href="" class="add-to-cart"> Add to Cart</a> -->
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-        </a>
+        <div class="product-item">
+            <img class="productImage" src="../assets/Images/BeautyCraftsSources/1.jpg" alt="Product 1">
+            <a href="" class="productName"><h3>Hydrating Face Mist</h3></a>
+            <p>$ 100</p>
+            <a href="#" class="add-to-cart">Add to Cart</a>
+        </div>
 
         <!-- Product 2 -->
-        <a href="" class="product-item">
-        <div>
-            <img class="productImage" src="../assets/Images/BeautyCraftsSources/2.jpg" alt="Product 2"">
-            <h3>Conatural Eye Serium</h3>
+        <div class="product-item">
+            <img class="productImage" src="../assets/Images/BeautyCraftsSources/2.jpg" alt="Product 1">
+            <a href="" class="productName"><h3>Hydrating Face Mist</h3></a>
             <p>$ 200</p>
-            <button class="add-to-cart">Add to Cart</button>
+            <a href="#" class="add-to-cart">Add to Cart</a>
         </div>
-        </a>
 
         <!-- Product 3 -->
-
-        <a href="" class="product-item">
-        <div>
-            <img class="productImage" src="../assets/Images/BeautyCraftsSources/3.jpg" alt="Product 3">
-            <h3>Hydrating Face Mist</h3>
+        <div class="product-item">
+            <img class="productImage" src="../assets/Images/BeautyCraftsSources/3.jpg" alt="Product 1">
+            <a href="" class="productName"><h3>Hydrating Face Mist</h3></a>
             <p>$ 300</p>
-            <button class="add-to-cart">Add to Cart</button>
+            <a href="#" class="add-to-cart">Add to Cart</a>
         </div>
-    </a>
 
         <!-- Product 4 -->
-        <a href="" class="product-item">
-        <div>
-            <img class="productImage" src="../assets/Images/BeautyCraftsSources/4.webp" alt="Product 4">
-            <h3>Conatural Eye Serium</h3>
+        <div class="product-item">
+            <img class="productImage" src="../assets/Images/BeautyCraftsSources/4.webp" alt="Product 1">
+            <a href="" class="productName"><h3>Hydrating Face Mist</h3></a>
             <p>$ 400</p>
-            <button class="add-to-cart">Add to Cart</button>
+            <a href="#" class="add-to-cart">Add to Cart</a>
         </div>
-        </a>
 
         <!-- Product 5 -->
-        <a href="" class="product-item">
-        <div>
-            <img class="productImage" src="../assets/Images/BeautyCraftsSources/5.webp" alt="Product 5">
-            <h3>Vegan Leather Bag</h3>
+        <div class="product-item">
+            <img class="productImage" src="../assets/Images/BeautyCraftsSources/5.webp" alt="Product 1">
+            <a href="" class="productName"><h3>Hydrating Face Mist</h3></a>
             <p>$ 500</p>
-            <button class="add-to-cart">Add to Cart</button>
+            <a href="#" class="add-to-cart">Add to Cart</a>
         </div>
-        </a>
 
         <!-- Product 6 -->
-
-        <a href="" class="product-item">
-        <div>
-            <img class="productImage" src="../assets/Images/BeautyCraftsSources/6.webp" alt="Product 6">
-            <h3>Conatural Eye Serium</h3>
+        <div class="product-item">
+            <img class="productImage" src="../assets/Images/BeautyCraftsSources/6.webp" alt="Product 1">
+            <a href="" class="productName"><h3>Hydrating Face Mist</h3></a>
             <p>$ 600</p>
-            <button class="add-to-cart">Add to Cart</button>
+            <a href="#" class="add-to-cart">Add to Cart</a>
         </div>
-        </a>
-
     </div>
 
     <!-- miniCart -->
-      
     <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="staticBackdropLabel">Cart</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <h5 class="offcanvas-title" id="staticBackdropLabel">Cart</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-          <div>
-
             <div class="maindiv">
-
                 <div class="imageDiv">
                     <img alt="Product 1" class="productImage" src="../assets/Images/BeautyCraftsSources/1.jpg">
-
                 </div>
-
                 <div class="productDetailsdiv">
                     <h5>Conatural Eye Serium</h5>
-                    <p><strong>price:</strong> $ 200</p>
+                    <p><strong>Price:</strong> $ 200</p>
                     <select title="quantity" id="quantity">
                         <option value="1">1</option>
                     </select>
-
                 </div>
             </div>
-
-            
-          </div>
-         
         </div>
-
-        <div class="btnsDiv" style=" display: flex;
-        flex-direction: column; justify-content: space-between; align-self: center;">
-            <a href="" class="checkoutBtn" style="  text-decoration: none;
-            color: white;
-            background-color: black;
-            text-align: center;
-            justify-content: center; width: 250px; border-radius: 20px; padding: 6px;">
-                Checkout
-            </a>
-
-            <a href="" class="continueShopBtn" style="  text-decoration: none;
-            color: black;
-            background-color: white;
-            text-align: center;
-            justify-content: center; width: 250px; border-radius: 20px; padding: 6px; border: 1px solid black;">
-                Continue Shopping
-            </a>
-
+        <div class="btnsDiv" style="display: flex; flex-direction: column; justify-content: space-between; align-self: center;">
+            <a href="#" class="checkoutBtn">Checkout</a>
+            <a href="#" class="continueShopBtn">Continue Shopping</a>
         </div>
-      </div>
-
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-   
+    <script src="../js/LoadComponent.js"></script>
+
+    <div id="footer"></div>
 </body>
-
-
-<div id="footer"></div>
-
-<script src="../js/LoadComponent.js"></script>
-
-
 </html>
