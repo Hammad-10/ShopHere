@@ -6,20 +6,23 @@ body {
 .navbar {
     background-color: black;
     padding: 1rem;
-align-items: center;}
+    display: flex; /* Ensure the navbar is a flex container */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space out items horizontally */
+}
 
 .nav-links {
-    list-style: none;    
+    list-style: none;
     display: flex;
     justify-content: space-around;
-    align-items: right;
+    align-items: center;
     margin: 0;
     padding: 0;
 }
 
 .nav-links li {
-    margin: 2px;
-    padding: 22px;
+    margin: 0 10px; /* Adjust margins for spacing */
+    padding: 0;
     text-align: center;
 }
 
@@ -27,7 +30,6 @@ align-items: center;}
     color: white;
     text-decoration: none;
     font-size: 1.2rem;
-    text-align: right;
 }
 
 .nav-links a:hover {
@@ -36,4 +38,16 @@ align-items: center;}
 
 .cart-icon {
     font-size: 1.5rem;
+}
+
+#cart-counter {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0.5rem 1rem;
+    margin-left: 10px;
+    font-size: 1rem;
+    min-width: 1.5rem; /* Ensure minimum width */
+    text-align: center; /* Center text inside the counter */
+    display: inline-block; /* Ensure it behaves like an inline element */
 }
