@@ -7,11 +7,12 @@
 
 .imageDiv {
     flex: 1;
+    margin-top: 50px;
 }
 
 .productImage {
     width: 300px;
-    height: 300px;
+    height: auto;
     margin-left: 250px
 }
 
@@ -21,7 +22,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-start;    
 }
 
 .productDetails h2 {
@@ -78,4 +79,31 @@
     margin-bottom: 20px;
     width: 400px;
 }
+
+.productimages{
+    display: flex;
+    flex-direction: row;
+    margin-left :290px;
+    width: 20%;
+}
+
+.image-1 
+{
+    
+    margin-right: 2px;
+}
+
+.img-1{
+
+    width: 67px;
+    height: auto;
+    margin-right: 9px;
+}
+
+.img-2 
+{
+    width: 73px;
+    height: 100px;
+}
+
 
