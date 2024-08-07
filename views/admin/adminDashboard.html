@@ -24,7 +24,7 @@
 </nav>
 
 <h2>Admin Dashboard</h2>
-<form action="/ptest/ShopHere/routes.php?page=insertProduct" method="post"  enctype="multipart/form-data">
+<form action="/ptest/ShopHere/routes.php?page=adminDashboard" method="post" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="sku" class="form-label">SKU</label>
         <input type="text" class="form-control" id="sku" name="sku" required>
@@ -41,21 +41,17 @@
         <label for="quantity" class="form-label">Quantity</label>
         <input type="number" class="form-control" id="quantity" name="quantity" required>
     </div>
-
     <div class="mb-3">
         <label for="images" class="form-label">Add Product Images</label>
         <input type="file" name="images[]" id="images" multiple required>
     </div>
-
-
     <button type="submit" class="btn btn-primary">Add Product</button>
 </form>
 
+<!-- Displaying the product list -->
+<?php echo $productList; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-
-
 </body>
-
-
+</html>
