@@ -161,6 +161,56 @@ class Product extends Database
         }
     }
 
+    public function updateProduct($sno, $sku, $name, $price, $quantity)
+    {
+        try {
+            $sql = "UPDATE Products SET sku = ?, name = ?, price = ?, quantity = ? WHERE sno = ?";
+            $stmt = $this->db->prepare($sql);
+
+            if (!$stmt) {
+                throw new Exception("Prepare statement failed: " . $this->db->error);
+            }
+
+            $stmt->bind_param('ssiii', $sku, $name, $price, $quantity,$sno);
+
+            if (!$stmt->execute()) {
+                throw new Exception("Execute failed: " . $stmt->error);
+            }
+
+            return true;
+        } catch (Exception $e) {
+            // Handle the exception
+            echo 'An error occurred while updating the product: ' . $e->getMessage();
+            return false;
+        }
+    }
+
+
+    public function deleteProduct($sno)
+    {
+        try {
+            $sql = "DELETE FROM Products WHERE sno = ?";
+            $stmt = $this->db->prepare($sql);
+
+            if (!$stmt) {
+                throw new Exception("Prepare statement failed: " . $this->db->error);
+            }
+
+            $stmt->bind_param('i', $sno);
+
+            if (!$stmt->execute()) {
+                throw new Exception("Execute failed: " . $stmt->error);
+            }
+
+            return true;
+        } catch (Exception $e) {
+            // Handle the exception
+            echo 'An error occurred while deleting the product: ' . $e->getMessage();
+            return false;
+        }
+    }
+
+
 
 
 }

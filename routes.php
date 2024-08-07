@@ -15,7 +15,10 @@ switch ($page) {
     case 'View_specificProduct':
         $sno = htmlspecialchars($_GET['sno']);
         (new ProductController())->specificProduct($sno);
-        break;    
+        break;   
+    case 'update_delete':
+        (new ProductController())->updateDelete();
+        break; 
     default:
         include 'index.html';
         break;

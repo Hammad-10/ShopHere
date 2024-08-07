@@ -3,8 +3,8 @@
 <?php
 
 $host = 'localhost';
-$user = 'root';
-$pass = 'MyStrongPassword1234$';
+$user = 'debian-sys-maint';
+$pass = 'JbRt9bTnasitZnAJ';
 $dbname = 'ShopHere';
 
 // Connect to the database
