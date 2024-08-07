@@ -5,7 +5,7 @@ class Database
     private $host = 'localhost';
     private $user = 'root';
     private $pass = 'JbRt9bTnasitZnAJ';
-    private $dbname = 'ptest';
+    private $dbname = 'ShopHere';
 
     public function __construct()
     {

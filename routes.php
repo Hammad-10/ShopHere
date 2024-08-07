@@ -1,9 +1,10 @@
 <?php
 session_start();
 
-require 'controllers/ProductController.php';
 require 'models/Database.php';
 require 'models/Product.php';
+
+require 'controllers/ProductController.php';
 
 
 
