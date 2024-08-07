@@ -1,10 +1,8 @@
 <?php
 
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 
 class ProductController
 {
@@ -15,71 +13,77 @@ class ProductController
         $this->productModel = new Product();
     }
 
-  
+    public function adminDashboard()
+    {
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $this->insertProduct();
+            }
+
+            $productList = $this->productModel->display();
+            include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
+        } catch (Exception $e) {
+            $error = 'An error occurred: ' . $e->getMessage();
+            include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
+            echo '<div style="color: red;">' . htmlspecialchars($error) . '</div>';
+        }
+    }
 
     public function insertProduct()
     {
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $sku = $_POST['sku'];
+        $productname = $_POST['productname'];
+        $price = $_POST['price'];
+        $quantity = $_POST['quantity'];
 
+        $this->productModel->insertProduct($sku, $productname, $price, $quantity);
 
-            $sku = $_POST['sku'];
-            $productname = $_POST['productname'];
-            $price = $_POST['price'];
-            $quantity = $_POST['quantity'];
+        $targetDir = "/var/www/html/ptest/ShopHere/ProductImagesUpload/";
 
-            $this->productModel->insertProduct($sku,$productname, $price, $quantity);
+        if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
+            $totalFiles = count($_FILES['images']['name']);
 
-    
+            for ($i = 0; $i < $totalFiles; $i++) {
+                $targetFile = $targetDir . basename($_FILES['images']['name'][$i]);
 
-             // Directory where the uploaded files will be moved
-             $targetDir = "/var/www/html/ptest/ShopHere/ProductImagesUpload/";
-
-
-             if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
-
-                
-
-                
-                $totalFiles = count($_FILES['images']['name']);
-
-              
-                
-        
-                for ($i = 0; $i < $totalFiles; $i++) {
-                    // Set the target file path for each file
-                    $targetFile = $targetDir . basename($_FILES['images']['name'][$i]);
-                    
-                    // Move the uploaded file to the target directory
-                    if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $targetFile)) {
-                        // Bind parameters and execute the statement
-                 
-                        // $sno = $_POST['sno'];       
-                        $imagePath = $targetFile;
-
-                        $this->insertProductImage($sku, $imagePath);
-        
-
-                    } else {
-                        echo "Sorry, there was an error uploading the file " . basename($_FILES['images']['name'][$i]) . ".<br>";
-                    }
+                if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $targetFile)) {
+                    $imagePath = $targetFile;
+                    $this->insertProductImage($sku, $imagePath);
+                } else {
+                    echo "Sorry, there was an error uploading the file " . basename($_FILES['images']['name'][$i]) . ".<br>";
                 }
             }
         }
+    }
 
-       
+    private function insertProductImage($sku, $imagePath)
+    {
+        $this->productModel->insertProductImage($sku, $imagePath);
     }
 
 
-    private function insertProductImage($sno, $imagePath){
-        $this->productModel->insertProductImage($sno, $imagePath);
 
-
+    public function specificProduct($sno)
+    {
+        try {
+            $result = $this->productModel->displaySpecificProduct($sno);
+            if ($result) {
+                // session_start();
+                $_SESSION['sno'] = $result['sno'];
+                $_SESSION['sku'] = $result['sku'];
+                $_SESSION['price'] = $result['price'];
+                $_SESSION['quantity'] = $result['quantity'];
+                $_SESSION['image'] = $result['image'];
+                // echo $_SESSION['sku'];
+                header('Location: /ptest/ShopHere/views/admin/viewSpecificProduct.php');
+                exit();
+            }
+        } catch (Exception $e) {
+            // Handle the exception
+            $error = 'An error occurred: ' . $e->getMessage();
+            exit();
+        }
     }
-
-
-    
-
- 
-
 
 }
+?>

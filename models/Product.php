@@ -40,47 +40,127 @@ class Product extends Database
         }
     }
 
-    public function insertProductImage($sku, $imagePath){
+    public function insertProductImage($sku, $imagePath)
+    {
         try {
 
             // getting sno of the inserted product
             $sql = "SELECT * from `Products` where `sku`='$sku'";
             $result = $this->db->query($sql);
 
-            if($result){
+            if ($result) {
                 $row = $result->fetch_assoc();
 
                 $sql = "INSERT INTO ProductImages (sno, image) VALUES (?, ?)";
+                $stmt = $this->db->prepare($sql);
+
+                if (!$stmt) {
+                    throw new Exception("Prepare statement failed: " . $this->db->error);
+                }
+
+                $stmt->bind_param("is", $row['sno'], $imagePath);
+
+
+                if (!$stmt->execute()) {
+                    throw new Exception("Execute failed: " . $stmt->error);
+                }
+
+                return true;
+            }
+
+
+
+
+
+            // inserting Product images
+
+        } catch (Exception $e) {
+            // Handle the exception
+            echo 'An error occurred while updating the product: ' . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function display()
+    {
+        try {
+     
+            $sql = "SELECT * FROM Products";
+            $result = $this->db->query($sql);
+
+            if (!$result) {
+                throw new Exception("Query failed: " . $this->db->error);
+            }
+
+            // Start generating the output
+            $output = '<table class="table">
+            <thead>
+                <tr>
+                   
+                    <th scope="col">SKU</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">PRICE</th>
+                    <th scope="col">QUANTITY</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>';
+
+            // Generate table rows
+            while ($row = $result->fetch_assoc()) {
+                // $imagePath = $row['image'];
+
+                $output .= '<tr>';
+                // $output .= '<td><img src="' . $imagePath . '" alt="Product Image" style="max-width: 40px; max-height: 40px;"></td>';
+                $output .= '<td>' . htmlspecialchars($row["sku"]) . '</td>';
+                $output .= '<td>' . htmlspecialchars($row["name"]) . '</td>';
+                $output .= '<td>' . htmlspecialchars($row["price"]) . '</td>';
+                $output .= '<td>' . htmlspecialchars($row["quantity"]) . '</td>';
+                $output .= '<td><a href="routes.php?page=View_specificProduct&sno=' . urlencode($row['sno']) . '" class="view btn btn-sm btn-primary">View</a></td>';
+                $output .= '</tr>';
+            }
+
+            $output .= '</tbody>
+        </table>';
+
+
+            return $output;
+        } catch (Exception $e) {
+            // Handle the exception
+            return 'An error occurred while displaying products: ' . $e->getMessage();
+        }
+    }
+
+    public function displaySpecificProduct($sno)
+    {
+        try {
+            $sql = "SELECT * FROM `Products` WHERE `sno` = ?";
             $stmt = $this->db->prepare($sql);
 
             if (!$stmt) {
                 throw new Exception("Prepare statement failed: " . $this->db->error);
             }
 
-            $stmt->bind_param("is", $row['sno'], $imagePath);
-           
+            $stmt->bind_param("s", $sno);
 
             if (!$stmt->execute()) {
                 throw new Exception("Execute failed: " . $stmt->error);
             }
 
-            return true;
-                
+            $result = $stmt->get_result();
+
+            if ($result === false) {
+                throw new Exception("Get result failed: " . $stmt->error);
             }
-            
 
-           
-
-
-           // inserting Product images
-            
+            return $result->fetch_assoc();
         } catch (Exception $e) {
             // Handle the exception
-            echo 'An error occurred while updating the product: ' . $e->getMessage();
+            echo 'An error occurred while fetching the product: ' . $e->getMessage();
             return false;
         }
-
     }
+
 
 
 }
