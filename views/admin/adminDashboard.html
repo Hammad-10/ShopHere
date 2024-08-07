@@ -24,10 +24,14 @@
 </nav>
 
 <h2>Admin Dashboard</h2>
-<form action="/ptest/ShopHere/routes.php?page=insertProduct" method="post">
+<form action="/ptest/ShopHere/routes.php?page=insertProduct" method="post"  enctype="multipart/form-data">
     <div class="mb-3">
         <label for="sku" class="form-label">SKU</label>
         <input type="text" class="form-control" id="sku" name="sku" required>
+    </div>
+    <div class="mb-3">
+        <label for="productname" class="form-label">Name</label>
+        <input type="text" class="form-control" id="productname" name="productname" required>
     </div>
     <div class="mb-3">
         <label for="price" class="form-label">Price</label>
@@ -37,6 +41,13 @@
         <label for="quantity" class="form-label">Quantity</label>
         <input type="number" class="form-control" id="quantity" name="quantity" required>
     </div>
+
+    <div class="mb-3">
+        <label for="images" class="form-label">Add Product Images</label>
+        <input type="file" name="images[]" id="images" multiple required>
+    </div>
+
+
     <button type="submit" class="btn btn-primary">Add Product</button>
 </form>
 
