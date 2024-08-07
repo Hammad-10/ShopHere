@@ -81,3 +81,11 @@ CREATE TABLE `ShopHere`.`ProductImages` ( `sno` INT(40) NOT NULL , `image` VARCH
 
 
 ALTER TABLE `Products` ADD `name` VARCHAR(40) NOT NULL AFTER `sku`;
+
+--
+CREATE TABLE `Customer` (
+  `customerId` varchar(50) NOT NULL,
+  `customerName` varchar(50) NOT NULL,
+  `CustomerPassword` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
