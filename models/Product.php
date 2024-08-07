@@ -131,6 +131,36 @@ class Product extends Database
         }
     }
 
+    public function displaySpecificProduct($sno)
+    {
+        try {
+            $sql = "SELECT * FROM `Products` WHERE `sno` = ?";
+            $stmt = $this->db->prepare($sql);
+
+            if (!$stmt) {
+                throw new Exception("Prepare statement failed: " . $this->db->error);
+            }
+
+            $stmt->bind_param("s", $sno);
+
+            if (!$stmt->execute()) {
+                throw new Exception("Execute failed: " . $stmt->error);
+            }
+
+            $result = $stmt->get_result();
+
+            if ($result === false) {
+                throw new Exception("Get result failed: " . $stmt->error);
+            }
+
+            return $result->fetch_assoc();
+        } catch (Exception $e) {
+            // Handle the exception
+            echo 'An error occurred while fetching the product: ' . $e->getMessage();
+            return false;
+        }
+    }
+
 
 
 }

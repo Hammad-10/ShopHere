@@ -12,6 +12,10 @@ switch ($page) {
     case 'adminDashboard':
         (new ProductController())->adminDashboard();
         break;
+    case 'View_specificProduct':
+        $sno = htmlspecialchars($_GET['sno']);
+        (new ProductController())->specificProduct($sno);
+        break;    
     default:
         include 'index.html';
         break;

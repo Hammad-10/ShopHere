@@ -60,5 +60,30 @@ class ProductController
     {
         $this->productModel->insertProductImage($sku, $imagePath);
     }
+
+
+
+    public function specificProduct($sno)
+    {
+        try {
+            $result = $this->productModel->displaySpecificProduct($sno);
+            if ($result) {
+                // session_start();
+                $_SESSION['sno'] = $result['sno'];
+                $_SESSION['sku'] = $result['sku'];
+                $_SESSION['price'] = $result['price'];
+                $_SESSION['quantity'] = $result['quantity'];
+                $_SESSION['image'] = $result['image'];
+                // echo $_SESSION['sku'];
+                header('Location: /ptest/ShopHere/views/admin/viewSpecificProduct.php');
+                exit();
+            }
+        } catch (Exception $e) {
+            // Handle the exception
+            $error = 'An error occurred: ' . $e->getMessage();
+            exit();
+        }
+    }
+
 }
 ?>
