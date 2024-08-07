@@ -24,14 +24,14 @@
 </nav>
 
 <h2>Admin Dashboard</h2>
-<form action="/ptest/ShopHere/routes.php?page=insertProduct" method="post">
+<form action="/ptest/ShopHere/routes.php?page=insertProduct" method="post"  enctype="multipart/form-data">
     <div class="mb-3">
         <label for="sku" class="form-label">SKU</label>
         <input type="text" class="form-control" id="sku" name="sku" required>
     </div>
     <div class="mb-3">
         <label for="productname" class="form-label">Name</label>
-        <input type="number" class="form-control" id="productname" name="productname" required>
+        <input type="text" class="form-control" id="productname" name="productname" required>
     </div>
     <div class="mb-3">
         <label for="price" class="form-label">Price</label>

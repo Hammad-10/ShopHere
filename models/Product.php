@@ -10,17 +10,17 @@ class Product extends Database
         $this->db = parent::__construct();
     }
 
-    public function insertProduct($sku, $price, $quantity)
+    public function insertProduct($sku, $productname, $price, $quantity)
     {
         try {
-            $sql = "INSERT INTO Products (sku, price, quantity) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO Products (sku, name, price, quantity) VALUES (?, ?, ?, ?)";
             $stmt = $this->db->prepare($sql);
 
             if ($stmt === false) {
                 throw new Exception("Prepare statement failed: " . $this->db->error);
             }
 
-            $stmt->bind_param("sii", $sku, $price, $quantity);
+            $stmt->bind_param("ssii", $sku, $productname, $price, $quantity);
 
             $result = $stmt->execute();
 
@@ -38,6 +38,48 @@ class Product extends Database
 
             return false;
         }
+    }
+
+    public function insertProductImage($sku, $imagePath){
+        try {
+
+            // getting sno of the inserted product
+            $sql = "SELECT * from `Products` where `sku`='$sku'";
+            $result = $this->db->query($sql);
+
+            if($result){
+                $row = $result->fetch_assoc();
+
+                $sql = "INSERT INTO ProductImages (sno, image) VALUES (?, ?)";
+            $stmt = $this->db->prepare($sql);
+
+            if (!$stmt) {
+                throw new Exception("Prepare statement failed: " . $this->db->error);
+            }
+
+            $stmt->bind_param("is", $row['sno'], $imagePath);
+           
+
+            if (!$stmt->execute()) {
+                throw new Exception("Execute failed: " . $stmt->error);
+            }
+
+            return true;
+                
+            }
+            
+
+           
+
+
+           // inserting Product images
+            
+        } catch (Exception $e) {
+            // Handle the exception
+            echo 'An error occurred while updating the product: ' . $e->getMessage();
+            return false;
+        }
+
     }
 
 
