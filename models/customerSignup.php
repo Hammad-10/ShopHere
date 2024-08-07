@@ -1,6 +1,8 @@
-
-
 <?php
+
+ini_set('display_errors', 1);
+ ini_set('display_startup_errors', 1);
+ error_reporting(E_ALL);
 
 $host = 'localhost';
 $user = 'root';
@@ -18,12 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode($json, true);
 
     // Extract username and password from the decoded data
-    $adminId = $data['adminId'];
-    $adminName = $data['adminName'];
-    $adminPassword = $data['adminPassword'];
+    $customerId = $data['customerId'];
+    $customerName = $data['customerName'];
+    $customerPassword = $data['customerPassword'];
 
     // Construct the SQL query to insert the new user
-    $sql = "INSERT INTO Admin (adminId, adminName, adminPassword) VALUES ('$adminId', '$adminName', '$adminPassword')";
+    $sql = "INSERT INTO Customer (customerId, customerName, CustomerPassword) VALUES ('$customerId', '$customerName', '$customerPassword')";
 
     // Execute the SQL query
     $result = mysqli_query($conn, $sql);
@@ -31,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check the result of the query
     if ($result) {
         // If the query was successful, send a success response
-        echo json_encode(['status' => 'success', 'message' => 'User registered successfully']);
+        echo json_encode(['status' => 'success', 'message' => 'Customer registered successfully']);
     } else {
         // If the query failed, send an error response
-        echo json_encode(['status' => 'error', 'message' => 'Failed to insert record']);
+        echo json_encode(['status' => 'error', 'message' => 'Failed to Register customer']);
     }
 }
 ?>
