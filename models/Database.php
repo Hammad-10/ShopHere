@@ -4,7 +4,7 @@ class Database
 {
     private $host = 'localhost';
     private $user = 'root';
-    private $pass = '';
+    private $pass = 'MyStrongPassword1234$';
     private $dbname = 'ShopHere';
 
     public function __construct()
