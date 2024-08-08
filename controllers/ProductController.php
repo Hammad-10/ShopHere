@@ -1,5 +1,7 @@
 <?php
 
+$insert = false;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -13,15 +15,27 @@ class ProductController
         $this->productModel = new Product();
     }
 
+
+    // admin view all products
+    public function viewAllProducts(){
+        echo $this->productModel->display();
+
+    }
+
     public function adminDashboard()
     {
         try {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $this->insertProduct();
+                $result = $this->insertProduct();
+
+                if($result){
+                $insert = $result;
+                }
             }
 
-            $productList = $this->productModel->display();
             include 'C:\\xampp\\htdocs\\ptest\\ShopHere\\views\\admin\\adminDashboard.html';
+        
+            
         } catch (Exception $e) {
             $error = 'An error occurred: ' . $e->getMessage();
             include 'C:\\xampp\\htdocs\\ptest\\ShopHere\\views\\admin\\adminDashboard.html';
@@ -36,7 +50,12 @@ class ProductController
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
 
-        $this->productModel->insertProduct($sku, $productname, $price, $quantity);
+        $result = $this->productModel->insertProduct($sku, $productname, $price, $quantity);
+
+        if($result){
+         $insert = true;
+         return $insert;
+        }
 
         $targetDir = "C:\\xampp\\htdocs\\ptest\\ShopHere\\ProductImagesUpload\\";
 
