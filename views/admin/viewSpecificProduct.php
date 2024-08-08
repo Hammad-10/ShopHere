@@ -25,7 +25,7 @@ error_reporting(E_ALL);
 <body>
     <div class="container mt-5">
         <h2>Product Form</h2>
-        <form action="/crudapp/routes.php?page=update_delete" method="post" enctype="multipart/form-data">
+        <form action="/ptest/ShopHere/routes.php?page=update_delete" method="post" enctype="multipart/form-data">
             <!-- Hidden input to store the sno -->
             <input type="hidden" name="sno" value="<?php echo htmlspecialchars($_SESSION['sno']); ?>">
 
@@ -33,15 +33,19 @@ error_reporting(E_ALL);
             <?php
             if (isset($_SESSION['image']))
                 echo '<img src="' . htmlspecialchars($_SESSION['image']) . '" alt="Product Image" style="width:100px;height:100px;">';
-            else {
-                echo '<input type="file" name="images[]" id="images" multiple required><br><br>';
-            }
+        
             ?>
 
             <!-- SKU field -->
             <div class="form-group">
                 <label for="sku">SKU:</label>
                 <input type="text" id="sku" name="sku" class="form-control" value="<?php echo htmlspecialchars($_SESSION['sku']); ?>">
+            </div>
+
+            <!-- Name field -->
+            <div class="form-group">
+                <label for="productname">Name:</label>
+                <input type="text" id="productname" name="productname" class="form-control" value="<?php echo htmlspecialchars($_SESSION['name']); ?>">
             </div>
 
             <!-- Price field -->

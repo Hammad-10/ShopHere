@@ -84,6 +84,10 @@ class Product extends Database
     public function display()
     {
         try {
+            $bootstrapLinks = '
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>';
      
             $sql = "SELECT * FROM Products";
             $result = $this->db->query($sql);
@@ -92,11 +96,12 @@ class Product extends Database
                 throw new Exception("Query failed: " . $this->db->error);
             }
 
+            echo '<h3 style = "margin-left:550px; margin-top: 25px; margin-bottom:25px"> Products</h3>';
+
             // Start generating the output
-            $output = '<table class="table">
+            $output = $bootstrapLinks . '<table class="table">
             <thead>
                 <tr>
-                   
                     <th scope="col">SKU</th>
                     <th scope="col">NAME</th>
                     <th scope="col">PRICE</th>
@@ -108,10 +113,7 @@ class Product extends Database
 
             // Generate table rows
             while ($row = $result->fetch_assoc()) {
-                // $imagePath = $row['image'];
-
                 $output .= '<tr>';
-                // $output .= '<td><img src="' . $imagePath . '" alt="Product Image" style="max-width: 40px; max-height: 40px;"></td>';
                 $output .= '<td>' . htmlspecialchars($row["sku"]) . '</td>';
                 $output .= '<td>' . htmlspecialchars($row["name"]) . '</td>';
                 $output .= '<td>' . htmlspecialchars($row["price"]) . '</td>';
@@ -122,7 +124,6 @@ class Product extends Database
 
             $output .= '</tbody>
         </table>';
-
 
             return $output;
         } catch (Exception $e) {
@@ -160,6 +161,56 @@ class Product extends Database
             return false;
         }
     }
+
+    public function updateProduct($sno, $sku, $name, $price, $quantity)
+    {
+        try {
+            $sql = "UPDATE Products SET sku = ?, name = ?, price = ?, quantity = ? WHERE sno = ?";
+            $stmt = $this->db->prepare($sql);
+
+            if (!$stmt) {
+                throw new Exception("Prepare statement failed: " . $this->db->error);
+            }
+
+            $stmt->bind_param('ssiii', $sku, $name, $price, $quantity,$sno);
+
+            if (!$stmt->execute()) {
+                throw new Exception("Execute failed: " . $stmt->error);
+            }
+
+            return true;
+        } catch (Exception $e) {
+            // Handle the exception
+            echo 'An error occurred while updating the product: ' . $e->getMessage();
+            return false;
+        }
+    }
+
+
+    public function deleteProduct($sno)
+    {
+        try {
+            $sql = "DELETE FROM Products WHERE sno = ?";
+            $stmt = $this->db->prepare($sql);
+
+            if (!$stmt) {
+                throw new Exception("Prepare statement failed: " . $this->db->error);
+            }
+
+            $stmt->bind_param('i', $sno);
+
+            if (!$stmt->execute()) {
+                throw new Exception("Execute failed: " . $stmt->error);
+            }
+
+            return true;
+        } catch (Exception $e) {
+            // Handle the exception
+            echo 'An error occurred while deleting the product: ' . $e->getMessage();
+            return false;
+        }
+    }
+
 
 
 
