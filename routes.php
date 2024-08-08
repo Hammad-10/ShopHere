@@ -9,6 +9,9 @@ require 'controllers/AuthController.php';
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
+ (new ProductController())->showProducts();
+
+
 switch ($page) {
     case 'adminDashboard':
         (new ProductController())->adminDashboard();
@@ -25,6 +28,9 @@ switch ($page) {
         break; 
     case 'admin_logout':
         (new AuthController())->adminLogout();
+        break; 
+    case 'showProducts':
+        (new ProductController())->showProducts();
         break; 
     default:
         include 'index.html';
