@@ -1,4 +1,70 @@
-<?php
+  <div class="product-grid">
+    <!-- Product 1 -->
+    <a href="Product.html" class="product-item">
+      <div>
+        <img class="productImage" src="../assets/Images/BeautyCraftsSources/1.jpg" alt="Product 1">
+        <h3>Hydrating Face Mist</h3>
+        <p>$ 100</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </a>
+
+    <!-- Product 2 -->
+    <a href="Product.html" class="product-item">
+      <div>
+        <img class="productImage" src="../assets/Images/BeautyCraftsSources/2.jpg" alt="Product 2">
+        <h3>Conatural Eye Serium</h3>
+        <p>$ 200</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </a>
+
+    <!-- Product 3 -->
+    <a href="Product.html" class="product-item">
+      <div>
+        <img class="productImage" src="../assets/Images/BeautyCraftsSources/3.jpg" alt="Product 1">
+        <h3>Hydrating Face Mist</h3>
+        <p>$ 300</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </a>
+
+    <!-- Product 4 -->
+    <a href="Product.html" class="product-item">
+      <div>
+        <img class="productImage" src="../assets/Images/BeautyCraftsSources/4.webp" alt="Product 1">
+        <h3>Hydrating Face Mist</h3>
+        <p>$ 400</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </a>
+
+    <!-- Product 5 -->
+    <a href="Product.html" class="product-item">
+      <div>
+        <img class="productImage" src="../assets/Images/BeautyCraftsSources/5.webp" alt="Product 1">
+        <h3>Hydrating Face Mist</h3>
+        <p>$ 500</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </a>
+
+    <!-- Product 6 -->
+    <a href="Product.html" class="product-item">
+      <div>
+        <img class="productImage" src="../assets/Images/BeautyCraftsSources/6.webp" alt="Product 1">
+        <h3>Hydrating Face Mist</h3>
+        <p>$ 600</p>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </a>
+
+  </div>
+
+
+  --------------------------PRODUCT.PHP----------------------------------------------
+
+  <?php
 
 
 class Product extends Database
@@ -153,10 +219,36 @@ class Product extends Database
             if (!$result) {
                 throw new Exception("Query failed: " . $this->db->error);
             }
-
-            return $result;
     
-
+            
+            $output = $bootstrapLinks;
+    
+            // Container for the product grid
+            $output .= '<div class="container">';
+            // $output .= '<h3 class="text-center my-4">Products</h3>';
+            $output .= '<div class="row">';
+    
+            while ($row = $result->fetch_assoc()) {
+                $output .= '<!-- Product ' . htmlspecialchars($row["sku"]) . ' -->';
+                $output .= '<div class="col-md-4">';
+                $output .= '<a href="routes.php?page=View_specificProduct&sno=' . urlencode($row['sno']) . '" class="product-item">';
+                $output .= '<div class="card mb-4">';
+                $output .= '<img class="productImage card-img-top" src="../assets/Images/BeautyCraftsSources/' . htmlspecialchars($row["sku"]) . '.jpg" alt="' . htmlspecialchars($row["name"]) . '">';
+                $output .= '<div class="card-body">';
+                $output .= '<h5 class="card-title">' . htmlspecialchars($row["name"]) . '</h5>';
+                $output .= '<p class="card-text">$ ' . htmlspecialchars($row["price"]) . '</p>';
+                $output .= '<a href="#" class="btn btn-primary add-to-cart">Add to Cart</a>';
+                $output .= '</div>';
+                $output .= '</div>';
+                $output .= '</a>';
+                $output .= '</div>'; // End col-md-4
+            }
+    
+            // Close the row and container divs
+            $output .= '</div>'; // End row
+            $output .= '</div>'; // End container
+    
+            return $output;
         } catch (Exception $e) {
             // Handle the exception
             return 'An error occurred while displaying products: ' . $e->getMessage();
@@ -243,3 +335,7 @@ class Product extends Database
         }
     }
 }
+
+
+
+/var/www/html/ptest/ShopHere/ProductImagesUpload/p...
