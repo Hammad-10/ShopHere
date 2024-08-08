@@ -1,5 +1,7 @@
 <?php
 
+$insert = false;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -13,18 +15,30 @@ class ProductController
         $this->productModel = new Product();
     }
 
+
+    // admin view all products
+    public function viewAllProducts(){
+        echo $this->productModel->display();
+
+    }
+
     public function adminDashboard()
     {
         try {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $this->insertProduct();
+                $result = $this->insertProduct();
+
+                if($result){
+                $insert = $result;
+                }
             }
 
-            $productList = $this->productModel->display();
-            include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
+            include 'C:\\xampp\\htdocs\\ptest\\ShopHere\\views\\admin\\adminDashboard.html';
+        
+            
         } catch (Exception $e) {
             $error = 'An error occurred: ' . $e->getMessage();
-            include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
+            include 'C:\\xampp\\htdocs\\ptest\\ShopHere\\views\\admin\\adminDashboard.html';
             echo '<div style="color: red;">' . htmlspecialchars($error) . '</div>';
         }
     }
@@ -36,9 +50,14 @@ class ProductController
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
 
-        $this->productModel->insertProduct($sku, $productname, $price, $quantity);
+        $result = $this->productModel->insertProduct($sku, $productname, $price, $quantity);
 
-        $targetDir = "/var/www/html/ptest/ShopHere/ProductImagesUpload/";
+        if($result){
+         $insert = true;
+         return $insert;
+        }
+
+        $targetDir = "C:\\xampp\\htdocs\\ptest\\ShopHere\\ProductImagesUpload\\";
 
         if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
             $totalFiles = count($_FILES['images']['name']);
@@ -71,6 +90,7 @@ class ProductController
                 // session_start();
                 $_SESSION['sno'] = $result['sno'];
                 $_SESSION['sku'] = $result['sku'];
+                $_SESSION['name'] = $result['name'];
                 $_SESSION['price'] = $result['price'];
                 $_SESSION['quantity'] = $result['quantity'];
                 $_SESSION['image'] = $result['image'];
@@ -82,6 +102,76 @@ class ProductController
             // Handle the exception
             $error = 'An error occurred: ' . $e->getMessage();
             exit();
+        }
+    }
+
+
+
+    public function updateDelete()
+    {
+        try {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $sno = $_POST['sno'];
+                $action = $_POST['action'];
+
+                $sku = $_POST['sku'];
+                $name = $_POST['productname'];
+
+                $price = $_POST['price'];
+                $quantity = $_POST['quantity'];
+
+                if ($action == 'update') {
+                   
+                    $this->updateProduct($sno, $sku, $name, $price, $quantity);
+
+                } else if ($action == 'delete') {
+                    $this->deleteProduct($sno);
+                } else {
+                    throw new Exception('Invalid action specified.');
+                }
+            }
+        } catch (Exception $e) {
+            // Handle the exception
+            $error = 'An error occurred: ' . $e->getMessage();
+
+
+            echo '<div style="color: red;">' . htmlspecialchars($error) . '</div>';
+        }
+    }
+
+    private function updateProduct($sno, $sku, $name, $price, $quantity)
+    {
+        try {
+            $resultupdate = $this->productModel->updateProduct($sno, $sku, $name, $price, $quantity);
+
+            if ($resultupdate) {
+                echo 'Product updated';
+            } else {
+                throw new Exception('Error updating product');
+            }
+        } catch (Exception $e) {
+            // Handle the exception
+            $error = 'An error occurred while updating the product: ' . $e->getMessage();
+
+            echo '<div style="color: red;">' . htmlspecialchars($error) . '</div>';
+        }
+    }
+
+    private function deleteProduct($sno)
+    {
+        try {
+            $resultdelete = $this->productModel->deleteProduct($sno);
+
+            if ($resultdelete) {
+                echo 'Product deleted';
+            } else {
+                throw new Exception('Error deleting product');
+            }
+        } catch (Exception $e) {
+            // Handle the exception
+            $error = 'An error occurred while deleting the product: ' . $e->getMessage();
+
+            echo '<div style="color: red;">' . htmlspecialchars($error) . '</div>';
         }
     }
 

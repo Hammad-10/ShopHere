@@ -4,7 +4,7 @@
 
 $host = 'localhost';
 $user = 'root';
-$pass = 'MyStrongPassword1234$';
+$pass = '';
 $dbname = 'ShopHere';
 
 // Connect to the database
