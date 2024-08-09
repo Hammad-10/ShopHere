@@ -46,6 +46,8 @@ class Product extends Database
     {
         try {
 
+          
+
             // getting sno of the inserted product
             $sql = "SELECT * from `Products` where `sku`='$sku'";
             $result = $this->db->query($sql);
@@ -166,7 +168,7 @@ class Product extends Database
         }
     }
     
-
+// specific product for admin
     public function displaySpecificProduct($sno)
     {
         try {
@@ -196,6 +198,45 @@ class Product extends Database
             return false;
         }
     }
+
+    //specific product for customer
+    public function CustomerSpecificProduct($sno)
+    {
+        try {
+            $sql = "SELECT p.sno, p.sku, p.name, p.price, p.quantity, GROUP_CONCAT(pi.image) AS images
+            FROM Products p
+            LEFT JOIN ProductImages pi ON p.sno = pi.sno
+            WHERE p.sno = '$sno'
+            GROUP BY p.sno, p.sku, p.name, p.price";
+    
+           
+           $result = $this->db->query($sql);
+
+            // if (!$stmt) {
+            //     throw new Exception("Prepare statement failed: " . $this->db->error);
+            // }
+
+            // $stmt->bind_param("s", $sno);
+
+            // if (!$stmt->execute()) {
+            //     throw new Exception("Execute failed: " . $stmt->error);
+            // }
+
+            // $result = $stmt->get_result();
+
+            // if ($result === false) {
+            //     throw new Exception("Get result failed: " . $stmt->error);
+            // }
+
+            return $result->fetch_assoc();
+        } catch (Exception $e) {
+            // Handle the exception
+            echo 'An error occurred while fetching the product: ' . $e->getMessage();
+            return false;
+        }
+    }
+
+
 
     public function updateProduct($sno, $sku, $name, $price, $quantity)
     {

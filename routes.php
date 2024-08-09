@@ -11,13 +11,20 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
 
 switch ($page) {
-    case 'adminDashboard':
-        (new ProductController())->adminDashboard();
+    case 'insertProduct':
+        (new ProductController())->insertProduct();
         break;
     case 'View_specificProduct':
         $sno = htmlspecialchars($_GET['sno']);
         (new ProductController())->specificProduct($sno);
-        break;   
+        break;
+        
+    case 'Customer_specificProduct':
+        $sno = htmlspecialchars($_GET['sno']);
+        (new ProductController())->Customer_specificProduct($sno);
+        break;
+        
+        
     case 'update_delete':
         (new ProductController())->updateDelete();
         break;
