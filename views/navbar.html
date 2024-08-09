@@ -4,7 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar Example</title>
-    <link rel="stylesheet" href="../css/navbar.css">
+    <!-- <link rel="stylesheet" href="../css/navbar.css"> -->
+
+    <style>
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: black;
+    padding: 1rem;
+    display: flex; /* Ensure the navbar is a flex container */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space out items horizontally */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 10px; /* Adjust margins for spacing */
+    padding: 0;
+    text-align: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.cart-icon {
+    font-size: 1.5rem;
+}
+
+#cart-counter {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0.5rem 1rem;
+    margin-left: 10px;
+    font-size: 1rem;
+    min-width: 1.5rem; /* Ensure minimum width */
+    text-align: center; /* Center text inside the counter */
+    display: inline-block; /* Ensure it behaves like an inline element */
+}
+
+
+
+    </style>
 
 </head>
 <body>
@@ -14,12 +73,12 @@
             <li><a href="#">Shop</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Connect</a></li>
-            <li><a href="#" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop"><i class="cart-icon">🛒</i></a></li>
+            <li><a href="#"  id="cartIcon"   data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop"><i class="cart-icon">🛒</i></a></li>
         </ul>
         <span id="cart-counter">0</span>
     </nav>
 
-    <script src="../js/cartCounter.js"></script>
+    <script src="/ptest/ShopHere/js/cartCounter.js"></script>
 </body>
 
 </html>
