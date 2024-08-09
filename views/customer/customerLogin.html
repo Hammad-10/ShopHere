@@ -32,19 +32,21 @@
               <form id="customerlogin" method="post">
                 <!-- Email input -->
                 <div data-mdb-input-init class="form-outline mb-4">
+                  <label class="form-label" for="customerId" >Customer Id</label>
                   <input type="text" id="customerId" class="form-control form-control-lg" name="customerId" required >
-                  <label class="form-label" for="customerId" >Enter Name</label>
+               
                 </div>
       
                 <!-- Password input -->
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input placeholder="Password" type="password" id="customerPassword" name="customerPassword" required class="form-control form-control-lg" />
                   <label class="form-label" for="customerPassword">Password</label>
+                  <input placeholder="Password" type="password" id="customerPassword" name="customerPassword" required class="form-control form-control-lg" />
+                  
                 </div>
       
       
                 <!-- Submit button -->
-                <button type="submit" id="submitcustomer" data-mdb-ripple-init class="btn btn-primary btn-lg btn-block">Log in</button>
+                <button type="submit" id="submitcustomer" data-mdb-ripple-init class="btn btn-primary btn-lg btn-block col-md-4">Log in</button>
                 
                 <div class="divider d-flex align-items-center my-4">
                   <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
@@ -52,7 +54,7 @@
               </form>
               <!--signup button-->
 
-                <a href="/ptest/ShopHere/views/customer/customerSignup.html" class="btn btn-primary btn-lg btn-block">Signup</a>
+                <a href="/ptest/ShopHere/views/customer/customerSignup.html" class="btn btn-primary btn-lg btn-block col-md-4">Signup</a>
         </div>
       </section>
 
