@@ -33,44 +33,41 @@ class ProductController
         include '/var/www/html/ptest/ShopHere/views/footer.html';
     }
 
-    public function adminDashboard()
-    {
-        try {
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                $result = $this->insertProduct();
+    // public function adminDashboard()
+    // {
+    //     try {
+    //         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //             $result = $this->insertProduct();
 
-                if($result){
-                $insert = $result;
-                }
-            }
+    //             if($result){
+    //             $insert = $result;
+    //             }
+    //         }
 
-            include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
+    //         include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
         
             
-        } catch (Exception $e) {
-            $error = 'An error occurred: ' . $e->getMessage();
-            include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
-            echo '<div style="color: red;">' . htmlspecialchars($error) . '</div>';
-        }
-    }
+    //     } catch (Exception $e) {
+    //         $error = 'An error occurred: ' . $e->getMessage();
+    //         include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
+    //         echo '<div style="color: red;">' . htmlspecialchars($error) . '</div>';
+    //     }
+    // }
 
     public function insertProduct()
     {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sku = $_POST['sku'];
         $productname = $_POST['productname'];
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
 
-        $result = $this->productModel->insertProduct($sku, $productname, $price, $quantity);
+        $this->productModel->insertProduct($sku, $productname, $price, $quantity);
 
-        if($result){
-         $insert = true;
-         return $insert;
-        }
-
-        $targetDir = "/var/www/html/ptest/ShopHere/ProductImagesUpload/";
+        $targetDir = "ProductImagesUpload/";
 
         if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
+       
             $totalFiles = count($_FILES['images']['name']);
 
             for ($i = 0; $i < $totalFiles; $i++) {
@@ -85,9 +82,11 @@ class ProductController
             }
         }
     }
+    }
 
     private function insertProductImage($sku, $imagePath)
     {
+       
         $this->productModel->insertProductImage($sku, $imagePath);
     }
 
@@ -107,6 +106,37 @@ class ProductController
                 $_SESSION['image'] = $result['image'];
                 // echo $_SESSION['sku'];
                 header('Location: /ptest/ShopHere/views/admin/viewSpecificProduct.php');
+                exit();
+            }
+        } catch (Exception $e) {
+            // Handle the exception
+            $error = 'An error occurred: ' . $e->getMessage();
+            exit();
+        }
+    }
+
+
+    // specific product for customer
+
+
+    public function Customer_specificProduct($sno)
+    {
+        try {
+            $result = $this->productModel->CustomerSpecificProduct($sno);
+            if ($result) {
+                // session_start();
+                $_SESSION['sno'] = $result['sno'];
+                $_SESSION['sku'] = $result['sku'];
+                $_SESSION['name'] = $result['name'];
+                $_SESSION['price'] = $result['price'];
+                $_SESSION['quantity'] = $result['quantity'];
+                $_SESSION['images'] = $result['images'];
+                // echo $_SESSION['sku'];
+
+                // i am here now just take data to customer/Product.html
+                include '/var/www/html/ptest/ShopHere/views/Product.html';
+                
+                // header('Location: /ptest/ShopHere/views/');
                 exit();
             }
         } catch (Exception $e) {

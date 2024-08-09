@@ -117,29 +117,38 @@
 
   </div>
 
-  <!-- product-grid -->
-  <div class="product-grid">
-    <div class="container">
-      <div class="row">
-        <?php while ($row = $result->fetch_assoc()) { ?>
-          <div class="col-md-4">
-            <div class="product-item"> <!-- Moved .product-item class here -->
-              <a href="routes.php?page=View_specificProduct&sno=<?php echo urlencode($row['sno']); ?>" class="product-link">
-                <div class="card mb-4">
-                  <img class="productImage card-img-top" src="../assets/Images/BeautyCraftsSources/<?php echo htmlspecialchars($row['sku']); ?>.jpg" alt="<?php echo htmlspecialchars($row['name']); ?>">
-                  <div class="card-body">
-                    <h5 class="card-title"><?php echo htmlspecialchars($row['name']); ?></h5>
-                    <p class="card-text">$ <?php echo htmlspecialchars($row['price']); ?></p>
-                    <a href="#" class="btn btn-primary add-to-cart">Add to Cart</a>
-                  </div>
+
+<!-- product-grid -->
+<div class="product-grid mt-5">
+  <div class="container">
+    <div class="row">
+      <?php while ($row = $result->fetch_assoc()) { 
+        $imagepaths = explode(',', $row['images']); // Split the images into an array
+        $firstImage = $imagepaths[0]; // Get the first image from the array
+        ?>
+        <div class="col-md-4">
+          <div class="product-item">
+            <a href="routes.php?page=Customer_specificProduct&sno=<?php echo urlencode($row['sno']); ?>" class="product-link">
+              <div class="card mb-4 text-center"> <!-- Added text-center class for horizontal centering -->
+                <div class="card-img-wrapper d-flex justify-content-center align-items-center" style="height: 150px;"> <!-- Adjust height as needed -->
+                  <img class="productImage" src="<?php echo htmlspecialchars($firstImage); ?>" style="height: 150px; width: 150px;" alt="<?php echo htmlspecialchars($row['name']); ?>"> <!-- Image centered -->
                 </div>
-              </a>
-            </div>
+                <div class="card-body">
+                  <h5 class="card-title" style="text-decoration: none;"><?php echo htmlspecialchars($row['name']); ?></h5>
+                  <p class="card-text">$ <?php echo htmlspecialchars($row['price']); ?></p>
+                  <a href="#" class="btn btn-primary add-to-cart">Add to Cart</a>
+                </div>
+              </div>
+            </a>
           </div>
-        <?php } ?>
-      </div>
+        </div>
+      <?php } ?>
     </div>
   </div>
+</div>
+
+
+
 
   <!-- miniCart -->
   <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="cartModal"
@@ -159,7 +168,7 @@
     </div>
     <div class="btnsDiv"
       style="display: flex; flex-direction: column; justify-content: space-between; align-self: center;">
-      <a href="checkout.html" class="checkoutBtn">Checkout</a>
+      <a href="/ptest/ShopHere/views/checkout.html" class="checkoutBtn">Checkout</a>
       <a href="#" class="continueShopBtn">Continue Shopping</a>
     </div>
   </div>
@@ -174,18 +183,16 @@
   <script>
   document.addEventListener("DOMContentLoaded", () => {
   const addtocartButtons = document.querySelectorAll('.add-to-cart');
-  const cartCountElement = document.querySelector('.cart-count');
   const cartIcon = document.getElementById('cartIcon');
   const cartItemsList = document.getElementById('cartItemsList');
   const clearCartButton = document.getElementById('clearCartButton');
-
+  
   let cartItems = [];
 
   addtocartButtons.forEach(button => {
     button.addEventListener("click", (e) => {
-      e.preventDefault(); // Prevent default action for the link
+      e.preventDefault();
 
-      // Find the closest product-item parent
       const productDiv = button.closest('.product-item');
       
       if (productDiv) {
@@ -203,17 +210,18 @@
   });
 
   cartIcon.addEventListener("click", () => {
-    const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
-    cartModal.show();
+    // Trigger the offcanvas manually if not using data attributes
+    const cartModal = document.getElementById('cartModal');
+    const bsOffcanvas = new bootstrap.Offcanvas(cartModal);
+    bsOffcanvas.show();
   });
 
-  clearCartButton.addEventListener("click", () => {
+  clearCartButton?.addEventListener("click", () => {
     cartItems = [];
     updateCart();
   });
 
   function updateCart() {
-    // cartCountElement.textContent = cartItems.length;
     cartItemsList.innerHTML = "";
 
     cartItems.forEach((item, index) => {
@@ -247,6 +255,7 @@
     });
   }
 });
+
 
   </script>
 
