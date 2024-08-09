@@ -3,8 +3,8 @@
 <?php
 
 $host = 'localhost';
-$user = 'root';
-$pass = 'MyStrongPassword1234$';
+$user = 'debian-sys-maint';
+$pass = 'JbRt9bTnasitZnAJ';
 $dbname = 'ShopHere';
 
 // Connect to the database
@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
+     
         // If the user exists, send a success response
         echo json_encode(['status' => 'success', 'message' => 'Login successful']);
     } else {
@@ -32,4 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo json_encode(['status' => 'error', 'message' => 'Invalid username or password']);
     }
 }
+
+
 ?>

@@ -26,6 +26,12 @@ switch ($page) {
     case 'viewAllProducts':
         (new ProductController())->viewAllProducts();
         break; 
+        
+    case 'showProducts':
+        $result = (new ProductController())->showProducts();
+        include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
+        
+        break;         
     case 'admin_logout':
         (new AuthController())->adminLogout();
         break; 
