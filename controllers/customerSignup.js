@@ -10,7 +10,7 @@ function buttonClickHandler(event) {
     const xhr = new XMLHttpRequest();
 
     // Open the object
-    xhr.open('POST', '/TM/ShopHere/models/customerSignup.php', true);
+    xhr.open('POST', '/ptest/ShopHere/models/customerSignup.php', true);
     xhr.setRequestHeader('Content-type', 'application/json');
 
     // What to do when response is ready
@@ -20,7 +20,7 @@ function buttonClickHandler(event) {
             let response = JSON.parse(this.responseText);
             if (response.status === 'success') {
                 // Redirect to login page
-                window.location.href = '/TM/ShopHere/views/customer/customerLogin.html';
+                window.location.href = '/ptest/ShopHere/views/customer/customerLogin.html';
             } else {
                 console.log(response.message);
             }

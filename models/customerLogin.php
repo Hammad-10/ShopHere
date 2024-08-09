@@ -2,10 +2,13 @@
 
 <?php
 
+session_start();
+
 $host = 'localhost';
-$user = 'root';
-$pass = 'MyStrongPassword1234$';
+$user = 'debian-sys-maint';
+$pass = 'JbRt9bTnasitZnAJ';
 $dbname = 'ShopHere';
+
 
 // Connect to the database
 $conn = mysqli_connect($host, $user, $pass, $dbname);
@@ -25,6 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
+
+        $_SESSION['customerId'] = $customerId;
+   
+
+
+        
         // If the user exists, send a success response
         echo json_encode(['status' => 'success', 'message' => 'Login successful']);
     } else {
