@@ -21,17 +21,6 @@ class ProductController
 
     }
 
-<<<<<<< HEAD
-    //customer view all products
-
-    public function showProducts()
-    {
-
-        echo $this->productModel->displayProducts();
-    }
-
-
-=======
     // customer view all products
     public function showProducts()
     {
@@ -43,7 +32,6 @@ class ProductController
         include '/var/www/html/ptest/ShopHere/views/footer.html';
     }
 
->>>>>>> c940f4773d5c79220baf2eb51d83b737e9b8ad12
     public function adminDashboard()
     {
         try {
@@ -55,20 +43,12 @@ class ProductController
                 }
             }
 
-<<<<<<< HEAD
-            include "/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html";
-=======
             include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
->>>>>>> c940f4773d5c79220baf2eb51d83b737e9b8ad12
         
             
         } catch (Exception $e) {
             $error = 'An error occurred: ' . $e->getMessage();
-<<<<<<< HEAD
-            include "/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html";
-=======
             include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
->>>>>>> c940f4773d5c79220baf2eb51d83b737e9b8ad12
             echo '<div style="color: red;">' . htmlspecialchars($error) . '</div>';
         }
     }
@@ -87,13 +67,7 @@ class ProductController
          return $insert;
         }
 
-<<<<<<< HEAD
-        // $targetDir = "C:\\xampp\\htdocs\\ptest\\ShopHere\\ProductImagesUpload\\";
         $targetDir = "/var/www/html/ptest/ShopHere/ProductImagesUpload/";
-
-=======
-        $targetDir = "/var/www/html/ptest/ShopHere/ProductImagesUpload/";
->>>>>>> c940f4773d5c79220baf2eb51d83b737e9b8ad12
 
         if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
             $totalFiles = count($_FILES['images']['name']);

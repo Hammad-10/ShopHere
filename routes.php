@@ -9,8 +9,6 @@ require 'controllers/AuthController.php';
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
- (new ProductController())->showProducts();
-
 
 switch ($page) {
     case 'adminDashboard':
