@@ -5,8 +5,8 @@ ini_set('display_errors', 1);
  error_reporting(E_ALL);
 
 $host = 'localhost';
-$user = 'debian-sys-maint';
-$pass = 'JbRt9bTnasitZnAJ';
+$user = 'root';
+$pass = '';
 $dbname = 'ShopHere';
 
 

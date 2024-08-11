@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">ShopHere</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,27 +37,30 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->
 
-<!-- <?php 
-if($insert){
-    
-    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> Product has been added.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>';
-}
-?> -->
-
-
-
-<h2 class="text-center">Admin Dashboard</h2>
+<h2 class="text-center">Add Product</h2>
 <div class="centered-form">
     <form action="/ptest/ShopHere/routes.php?page=insertProduct" method="post" enctype="multipart/form-data">
+
+        <!-- Categories Dropdown -->
+        <div class="mb-3">
+            <label for="category" class="form-label">Choose Category</label>
+            <select class="form-control" id="category" name="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <?php while ($row = $categories->fetch_assoc()) { ?>
+                    <option value="<?php echo $row['categId']; ?>"><?php echo $row['categName']; ?></option>
+                <?php } ?>
+            </select>
+        </div>
+
+        <!-- SKU Field -->
         <div class="mb-3">
             <label for="sku" class="form-label">SKU</label>
             <input type="text" class="form-control" id="sku" name="sku" required>
         </div>
+
+        <!-- Other Fields -->
         <div class="mb-3">
             <label for="productname" class="form-label">Name</label>
             <input type="text" class="form-control" id="productname" name="productname" required>
@@ -74,14 +77,13 @@ if($insert){
             <label for="images" class="form-label">Add Product Images</label>
             <input type="file" name="images[]" id="images" multiple required>
         </div>
+
+        <!-- Submit Button -->
         <div class="button-group">
             <button type="submit" class="btn btn-primary btn-wide">Add Product</button>
         </div>
     </form>
-    <div class="button-group mt-5">
-        <a href="/ptest/ShopHere/routes.php?page=viewAllProducts" class="btn btn-secondary">View All Products</a>
-        <a href="routes.php?page=viewOrders" class="btn btn-secondary">View Orders</a>
-    </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

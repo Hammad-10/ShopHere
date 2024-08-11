@@ -22,6 +22,26 @@ class ProductController
 
     }
 
+     // admin view all products category wise
+     public function productCategWise($categId, $categName){
+        echo $this->productModel->displayProdCategWise($categId, $categName);
+
+    }
+
+    // admin view all customers
+    public function viewAllCustomers(){
+        echo $this->productModel->displayCustomers();
+
+    }
+
+    // admin view all products
+    public function viewAllOrders(){
+        echo $this->productModel->displayOrders();
+    
+    }
+
+
+
     // customer view all products
     public function showProducts()
     {
@@ -54,15 +74,40 @@ class ProductController
     //     }
     // }
 
+    public function addNewCategory(){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $categName = $_POST['categoryName'];
+
+            $this->productModel->newCategory($categName);
+
+            $categories = $this->productModel->displayCategories();
+            include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
+        }
+
+        else{
+            $categories = $this->productModel->displayCategories();
+            include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
+        }
+
+    }
+
+    public function deleteCategory($categId){
+
+        $this->productModel->categoryDelete($categId);
+
+    }
+
     public function insertProduct()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $selectedCategory = $_POST['category'];
         $sku = $_POST['sku'];
         $productname = $_POST['productname'];
         $price = $_POST['price'];
         $quantity = $_POST['quantity'];
 
-        $this->productModel->insertProduct($sku, $productname, $price, $quantity);
+        $this->productModel->insertProduct($sku, $productname, $price, $quantity, $selectedCategory);
 
         $targetDir = "ProductImagesUpload/";
 

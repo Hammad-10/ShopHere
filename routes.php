@@ -10,6 +10,12 @@ require 'controllers/AuthController.php';
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
 switch ($page) {
+
+    case 'adminDashboard':
+        $categories = (new Product())->displayCategories();
+        include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\adminDashboard.html';
+        break;    
+
     case 'insertProduct':
         (new ProductController())->insertProduct();
         break;
@@ -22,7 +28,22 @@ switch ($page) {
         $sno = htmlspecialchars($_GET['sno']);
         (new ProductController())->Customer_specificProduct($sno);
         break;
+
+    case 'deleteCategory':
+        $categId = htmlspecialchars($_GET['categoryId']);
+        (new ProductController())->deleteCategory($categId);
+        break;
+       
+    case 'categories':
+        $categories = (new Product())->displayCategories();
+        include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
+        break;
         
+    case 'productCategWise':
+        $categId = htmlspecialchars($_GET['categoryId']);
+        $categName = htmlspecialchars($_GET['categoryName']);
+        (new ProductController())->productCategWise($categId, $categName);
+        break;   
         
     case 'update_delete':
         (new ProductController())->updateDelete();
@@ -30,15 +51,32 @@ switch ($page) {
     case 'viewAllProducts':
         (new ProductController())->viewAllProducts();
         break; 
+
+    case 'viewAllCustomers':
+        (new ProductController())->viewAllCustomers();
+        break;
+
+    case 'viewAllOrders':
+        (new ProductController())->viewAllOrders();
+        break;
+
+    case 'addNewCategory':
+        (new ProductController())->addNewCategory();
+        break; 
         
     case 'showProducts':
         $result = (new ProductController())->showProducts();
-        include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
-        
+        include 'C:\xampp\htdocs\ptest\ShopHere\views\categoryListing.html';
         break;         
+
     case 'admin_logout':
         (new AuthController())->adminLogout();
         break; 
+
+    case 'customer_logout':
+        (new AuthController())->customerLogout();
+        break; 
+
     default:
         include 'index.html';
         break;
