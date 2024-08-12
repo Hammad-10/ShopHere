@@ -13,19 +13,41 @@
 
         <div id="navbar"></div>
 
+        <?php 
+        $imagepaths = explode(',', $_SESSION['images']); // Split the images into an array
+        
+        $firstImage = '';
+        $secondImage = '';
+        $thirdImage = '';
+        
+        $length = count($imagepaths);
+        
+        for($i = 0; $i < $length; $i++){
+            if($i == 0){
+                $firstImage = $imagepaths[$i]; // Get the first image from the array
+            }
+            else if($i == 1){
+                $secondImage = $imagepaths[$i]; // Get the second image from the array
+            }
+            else if($i == 2){
+                $thirdImage = $imagepaths[$i]; // Get the third image from the array
+            }
+        }
+        ?>
+
         <div class="productContainer">
             <div class="imageDiv">
-                <img src="../assets/Images/BeautyCraftsSources/4.webp" alt="Conatural Eye Serum" class="productImage">
+                <img  src="<?php echo htmlspecialchars($firstImage); ?>" alt="Conatural Eye Serum" class="productImage">
             </div>
            
-            <div class="productDetails">
-                <h2><?php echo $_SESSION['name'] ?></h2>
-                <small>$ <?php echo $_SESSION['price'] ?></small>
+            <div class="product-item">
+                <h2 class="card-title"><?php echo $_SESSION['name'] ?></h2>
+                <small class="card-text">$ <?php echo $_SESSION['price'] ?></small>
                 <div class="quantityBox">
                     <label for="quantity">Quantity:</label>
                     <input type="number" id="quantity" name="quantity" value="1" min="1">
                 </div>
-                <button class="addToCartButton" id="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" id="add-to-cart">Add to Cart</button>
                 <div class="socialMediaIcons">
 
                     <h5>Share</h5>
@@ -81,13 +103,13 @@
     
         <div class="productimages">
             <div class="image-1">
-                <p>image 1</p>
-                <img src="../assets/Images/BeautyCraftsSources/5.webp" alt="Conatural Eye Serum" class="img-1">
+             
+                <img src="<?php echo htmlspecialchars($secondImage); ?>"  class="img-1">
             </div>
-            <div class="image-2"> </div>
+            
             <div class="image-2">
-                <p>image 2</p>
-                <img src="../assets/Images/BeautyCraftsSources/6.webp" alt="Conatural Eye Serum" class="img-2">
+            
+                <img src="<?php echo htmlspecialchars($thirdImage); ?>"  class="img-2">
             </div>
         </div>
 
@@ -108,7 +130,7 @@
 
 
 
-  <script src="/ptest/ShopHere/js/addToCart.js"> </script>
+  <script src="/ptest/ShopHere/js/ProductaddToCart.js"> </script>
 
   <script src="/ptest/ShopHere/js/cartCounter.js"></script>
   

@@ -1,6 +1,8 @@
 <?php
 
 
+
+
 class Product extends Database
 {
     private $db;
@@ -11,7 +13,8 @@ class Product extends Database
     }
 
 
-    public function newCategory($categName){
+    public function newCategory($categName)
+    {
 
         try {
             $sql = "INSERT INTO ProductCategories (categName) VALUES (?)";
@@ -42,23 +45,24 @@ class Product extends Database
     }
 
 
-    public function categoryDelete($categId){
+    public function categoryDelete($categId)
+    {
         $sql = "DELETE from `ProductCategories` where `categId`='$categId'";
         $result = $this->db->query($sql);
-
     }
 
-    public function displayCategories(){
+    public function displayCategories()
+    {
 
         try {
             $sql = "SELECT * from `ProductCategories`";
-    $result = $this->db->query($sql);
+            $result = $this->db->query($sql);
 
-    if (!$result) {
-        throw new Exception("Query failed: " . $this->db->error);
-    }
+            if (!$result) {
+                throw new Exception("Query failed: " . $this->db->error);
+            }
 
-    return $result;
+            return $result;
         } catch (Exception $e) {
             // Handle the exception
             $error = 'An error occurred while inserting the product: ' . $e->getMessage();
@@ -68,7 +72,6 @@ class Product extends Database
 
             return false;
         }
-
     }
 
     public function insertProduct($sku, $productname, $price, $quantity, $selectedCategory)
@@ -105,7 +108,7 @@ class Product extends Database
     {
         try {
 
-          
+
 
             // getting sno of the inserted product
             $sql = "SELECT * from `Products` where `sku`='$sku'";
@@ -198,29 +201,29 @@ class Product extends Database
     }
 
 
-        // admin view all products category wise
+    // admin view all products category wise
 
-        public function displayProdCategWise($categId, $categName)
-        {
-            try {
-                $bootstrapLinks = '
+    public function displayProdCategWise($categId, $categName)
+    {
+        try {
+            $bootstrapLinks = '
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>';
-    
-                $sql = "SELECT * FROM Products where `categId`='$categId'";
-                $result = $this->db->query($sql);
-    
-                if (!$result) {
-                    throw new Exception("Query failed: " . $this->db->error);
-                }
 
-                
-    
-                echo '<h3 style = "margin-left:550px; margin-top: 25px; margin-bottom:25px">'.$categName.'</h3>';
-    
-                // Start generating the output
-                $output = $bootstrapLinks . '<table class="table">
+            $sql = "SELECT * FROM Products where `categId`='$categId'";
+            $result = $this->db->query($sql);
+
+            if (!$result) {
+                throw new Exception("Query failed: " . $this->db->error);
+            }
+
+
+
+            echo '<h3 style = "margin-left:550px; margin-top: 25px; margin-bottom:25px">' . $categName . '</h3>';
+
+            // Start generating the output
+            $output = $bootstrapLinks . '<table class="table">
                 <thead>
                     <tr>
                         <th scope="col">SKU</th>
@@ -231,28 +234,28 @@ class Product extends Database
                     </tr>
                 </thead>
                 <tbody>';
-    
-                // Generate table rows
-                while ($row = $result->fetch_assoc()) {
-                    $output .= '<tr>';
-                    $output .= '<td>' . htmlspecialchars($row["sku"]) . '</td>';
-                    $output .= '<td>' . htmlspecialchars($row["name"]) . '</td>';
-                    $output .= '<td>' . htmlspecialchars($row["price"]) . '</td>';
-                    $output .= '<td>' . htmlspecialchars($row["quantity"]) . '</td>';
-                    $output .= '<td><a href="routes.php?page=View_specificProduct&sno=' . urlencode($row['sno']) . '" class="view btn btn-sm btn-primary">View</a></td>';
-                    $output .= '</tr>';
-                }
-    
-                $output .= '</tbody>
-            </table>';
-    
-                return $output;
-            } catch (Exception $e) {
-                // Handle the exception
-                return 'An error occurred while displaying products: ' . $e->getMessage();
+
+            // Generate table rows
+            while ($row = $result->fetch_assoc()) {
+                $output .= '<tr>';
+                $output .= '<td>' . htmlspecialchars($row["sku"]) . '</td>';
+                $output .= '<td>' . htmlspecialchars($row["name"]) . '</td>';
+                $output .= '<td>' . htmlspecialchars($row["price"]) . '</td>';
+                $output .= '<td>' . htmlspecialchars($row["quantity"]) . '</td>';
+                $output .= '<td><a href="routes.php?page=View_specificProduct&sno=' . urlencode($row['sno']) . '" class="view btn btn-sm btn-primary">View</a></td>';
+                $output .= '</tr>';
             }
+
+            $output .= '</tbody>
+            </table>';
+
+            return $output;
+        } catch (Exception $e) {
+            // Handle the exception
+            return 'An error occurred while displaying products: ' . $e->getMessage();
         }
-    
+    }
+
 
 
 
@@ -265,16 +268,16 @@ class Product extends Database
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>';
-    
+
             $sql = "SELECT * FROM Customer";
             $result = $this->db->query($sql);
-    
+
             if (!$result) {
                 throw new Exception("Query failed: " . $this->db->error);
             }
-    
+
             echo '<h3 class="text-center my-3">Customers</h3>';
-    
+
             // Start generating the output
             $output = $bootstrapLinks . '
             <div class="d-flex justify-content-center">
@@ -286,7 +289,7 @@ class Product extends Database
                         </tr>
                     </thead>
                     <tbody>';
-    
+
             // Generate table rows
             while ($row = $result->fetch_assoc()) {
                 $output .= '<tr>';
@@ -294,40 +297,42 @@ class Product extends Database
                 $output .= '<td>' . htmlspecialchars($row["customerName"]) . '</td>';
                 $output .= '</tr>';
             }
-    
+
             $output .= '</tbody>
                 </table>
             </div>';
-    
+
             return $output;
         } catch (Exception $e) {
-            // Handle the exception
-            return 'An error occurred while displaying customers: ' . $e->getMessage();
+            // Handle the exception        
+            // case 'checkout':
+            //     $orders = (new Product())->getOrders();
+            //     include '/var/www/html/ptest/ShopHere/views/checkout.html';
+            //     break;
         }
     }
-    
 
-  // admin view all Orders
+    // admin view all Orders
 
-  public function displayOrders()
-  {
-      try {
-          $bootstrapLinks = '
+    public function displayOrders()
+    {
+        try {
+            $bootstrapLinks = '
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
           <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>';
-  
-          $sql = "SELECT * FROM Orders";
-          $result = $this->db->query($sql);
-  
-          if (!$result) {
-              throw new Exception("Query failed: " . $this->db->error);
-          }
-  
-          echo '<h3 class="text-center my-3">Orders</h3>';
-  
-          // Start generating the output
-          $output = $bootstrapLinks . '
+
+            $sql = "SELECT * FROM Orders";
+            $result = $this->db->query($sql);
+
+            if (!$result) {
+                throw new Exception("Query failed: " . $this->db->error);
+            }
+
+            echo '<h3 class="text-center my-3">Orders</h3>';
+
+            // Start generating the output
+            $output = $bootstrapLinks . '
           <div class="d-flex justify-content-center">
               <table class="table table-bordered w-auto">
                   <thead>
@@ -339,27 +344,57 @@ class Product extends Database
                       </tr>
                   </thead>
                   <tbody>';
-  
-          // Generate table rows
-          while ($row = $result->fetch_assoc()) {
-              $output .= '<tr>';
-              $output .= '<td>' . htmlspecialchars($row["orderId"]) . '</td>';
-              $output .= '<td>' . htmlspecialchars($row["product"]) . '</td>';
-              $output .= '<td>' . htmlspecialchars($row["customerId"]) . '</td>';
-              $output .= '<td>' . htmlspecialchars($row["date"]) . '</td>';
-              $output .= '</tr>';
-          }
-  
-          $output .= '</tbody>
+
+            // Generate table rows
+            while ($row = $result->fetch_assoc()) {
+                $output .= '<tr>';
+                $output .= '<td>' . htmlspecialchars($row["orderId"]) . '</td>';
+                $output .= '<td>' . htmlspecialchars($row["product"]) . '</td>';
+                $output .= '<td>' . htmlspecialchars($row["customerId"]) . '</td>';
+                $output .= '<td>' . htmlspecialchars($row["datetime"]) . '</td>';
+                $output .= '</tr>';
+            }
+
+            $output .= '</tbody>
               </table>
           </div>';
-  
-          return $output;
-      } catch (Exception $e) {
-          // Handle the exception
-          return 'An error occurred while displaying customers: ' . $e->getMessage();
-      }
-  }
+
+            return $output;
+        } catch (Exception $e) {
+            // Handle the exception
+            return 'An error occurred while displaying customers: ' . $e->getMessage();
+        }
+    }
+
+
+
+    // customer  view orders info in checkout
+
+    public function checkoutOrdersInfo()
+    {
+        try {
+
+            $customerId = $_SESSION['customerId'];
+
+            $sql = "SELECT * from `Orders` where `customerId`='$customerId'";
+            $result = $this->db->query($sql); 
+
+            if (!$result) {
+                throw new Exception("Query failed: " . $this->db->error);
+            }
+
+            return $result;
+        } catch (Exception $e) {
+            // Handle the exception
+            $error = 'An error occurred while inserting the product: ' . $e->getMessage();
+
+            // Optionally, log the error or display it
+            echo '<div style="color: red;">' . htmlspecialchars($error) . '</div>';
+
+            return false;
+        }
+    }
+
 
 
 
@@ -372,27 +407,25 @@ class Product extends Database
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>';
-    
+
             $sql = "SELECT p.sno, p.sku, p.name, p.price, GROUP_CONCAT(pi.image) AS images
                     FROM Products p
                     LEFT JOIN ProductImages pi ON p.sno = pi.sno
                     GROUP BY p.sno, p.sku, p.name, p.price";
             $result = $this->db->query($sql);
-    
+
             if (!$result) {
                 throw new Exception("Query failed: " . $this->db->error);
             }
 
             return $result;
-    
-
         } catch (Exception $e) {
             // Handle the exception
             return 'An error occurred while displaying products: ' . $e->getMessage();
         }
     }
-    
-// specific product for admin
+
+    // specific product for admin
     public function displaySpecificProduct($sno)
     {
         try {
@@ -432,9 +465,9 @@ class Product extends Database
             LEFT JOIN ProductImages pi ON p.sno = pi.sno
             WHERE p.sno = '$sno'
             GROUP BY p.sno, p.sku, p.name, p.price";
-    
-           
-           $result = $this->db->query($sql);
+
+
+            $result = $this->db->query($sql);
 
             // if (!$stmt) {
             //     throw new Exception("Prepare statement failed: " . $this->db->error);

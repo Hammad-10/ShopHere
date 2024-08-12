@@ -1,74 +1,102 @@
-document.addEventListener("navbarLoaded", () => { // Listen for navbarLoaded event
+document.addEventListener("navbarLoaded", () => {
     const addtocartButtons = document.querySelectorAll('.add-to-cart');
     const cartIcon = document.getElementById('cartIcon');
     const cartItemsList = document.getElementById('cartItemsList');
     const clearCartButton = document.getElementById('clearCartButton');
+    const checkoutButton = document.querySelector('.checkoutBtn');
     
     let cartItems = [];
-  
+
+    // Adding items to the cart
     addtocartButtons.forEach(button => {
-      button.addEventListener("click", (e) => {
-        e.preventDefault();
-  
-        const productDiv = button.closest('.product-item');
-        
-        if (productDiv) {
-          const imageSrc = productDiv.querySelector('.productImage').src;
-          const title = productDiv.querySelector('.card-title').innerText;
-          const price = productDiv.querySelector('.card-text').innerText.replace('$', '').trim();
-  
-          const item = { imageSrc, title, price };
-          cartItems.push(item);
-          updateCart();
-        } else {
-          console.error("Product item container not found!");
-        }
-      });
-    });
-  
-    cartIcon.addEventListener("click", () => {
-      // Trigger the offcanvas manually if not using data attributes
-      const cartModal = document.getElementById('cartModal');
-      const bsOffcanvas = new bootstrap.Offcanvas(cartModal);
-      bsOffcanvas.show();
-    });
-  
-    clearCartButton?.addEventListener("click", () => {
-      cartItems = [];
-      updateCart();
-    });
-  
-    function updateCart() {
-      cartItemsList.innerHTML = "";
-  
-      cartItems.forEach((item, index) => {
-        const cartItemDiv = document.createElement('div');
-        cartItemDiv.className = 'maindiv mb-3';
-  
-        cartItemDiv.innerHTML = `
-          <div class="imageDiv">
-            <img alt="${item.title}" class="productImage" src="${item.imageSrc}">
-          </div>
-          <div class="productDetailsdiv">
-            <h5>${item.title}</h5>
-            <p><strong>Price:</strong> $${item.price}</p>
-            <select title="quantity" id="quantity-${index}">
-              <option value="1">1</option>
-            </select>
-            <button class="btn btn-danger btn-sm ms-2 remove-item" data-index="${index}">Remove</button>
-          </div>
-        `;
-  
-        cartItemsList.appendChild(cartItemDiv);
-      });
-  
-      const removeButtons = document.querySelectorAll('.remove-item');
-      removeButtons.forEach(button => {
         button.addEventListener("click", (e) => {
-          const index = e.target.getAttribute('data-index');
-          cartItems.splice(index, 1);
-          updateCart();
+            e.preventDefault();
+
+            const productDiv = button.closest('.product-item');
+            if (productDiv) {
+                const imageSrc = productDiv.querySelector('.productImage').src;
+                const title = productDiv.querySelector('.card-title').innerText;
+                const price = productDiv.querySelector('.card-text').innerText.replace('$', '').trim();
+
+                const item = { imageSrc, title, price };
+                cartItems.push(item);
+                updateCart();
+            } else {
+                console.error("Product item container not found!");
+            }
         });
-      });
+    });
+
+    cartIcon.addEventListener("click", () => {
+        const cartModal = document.getElementById('cartModal');
+        const bsOffcanvas = new bootstrap.Offcanvas(cartModal);
+        bsOffcanvas.show();
+    });
+
+    clearCartButton?.addEventListener("click", () => {
+        cartItems = [];
+        updateCart();
+    });
+
+    checkoutButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        if (cartItems.length > 0) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/ptest/ShopHere/models/addToCart.php", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log("Order processed successfully.");
+                    window.location.href = "/ptest/ShopHere/routes.php?page=checkout";
+                }
+            };
+
+            const orderData = {
+                cartItems: cartItems
+            };
+            xhr.send(JSON.stringify(orderData));
+        }
+    });
+
+    function updateCart() {
+        cartItemsList.innerHTML = "";
+
+        cartItems.forEach((item, index) => {
+            const cartItemDiv = document.createElement('div');
+            cartItemDiv.className = 'maindiv mb-3';
+
+            cartItemDiv.innerHTML = `
+                <div class="imageDiv">
+                    <img alt="${item.title}" class="productImage" src="${item.imageSrc}">
+                </div>
+                <div class="productDetailsdiv">
+                    <h5>${item.title}</h5>
+                    <p><strong>Price:</strong> $${item.price}</p>
+                    <select title="quantity" id="quantity-${index}">
+                        <option value="1">1</option>
+                    </select>
+                    <button class="btn btn-danger btn-sm ms-2 remove-item" data-index="${index}">Remove</button>
+                </div>
+            `;
+
+            cartItemsList.appendChild(cartItemDiv);
+        });
+
+        // Attach event listeners for remove buttons after the cart is updated
+        attachRemoveItemListeners();
+    }
+
+    function attachRemoveItemListeners() {
+        const removeButtons = document.querySelectorAll('.remove-item');
+        removeButtons.forEach(button => {
+            button.addEventListener("click", (e) => {
+                console.log('remove btn clicked');
+                const index = e.target.getAttribute('data-index');
+                cartItems.splice(index, 1);
+                updateCart(); // Re-render the cart with updated indices
+            });
+        });
     }
 });
