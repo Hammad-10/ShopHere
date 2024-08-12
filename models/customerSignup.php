@@ -3,11 +3,10 @@
 ini_set('display_errors', 1);
  ini_set('display_startup_errors', 1);
  error_reporting(E_ALL);
-
-$host = 'localhost';
-$user = 'debian-sys-maint';
-$pass = 'JbRt9bTnasitZnAJ';
-$dbname = 'ShopHere';
+ $host = 'localhost';
+ $user = 'root';
+ $pass = 'MyStrongPassword1234$';
+ $dbname = 'ShopHere';
 
 
 
