@@ -66,7 +66,7 @@ switch ($page) {
         
     case 'showProducts':
         $result = (new ProductController())->showProducts();
-        include '/ptest/ShopHere/views/categoryListing.html';
+        include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
         break;         
 
     case 'admin_logout':
@@ -75,7 +75,12 @@ switch ($page) {
 
     case 'customer_logout':
         (new AuthController())->customerLogout();
-        break; 
+        break;
+        
+    case 'checkout':
+        $orders = (new Product())->checkoutOrdersInfo();
+        include '/var/www/html/ptest/ShopHere/views/checkout.html';
+        break;
 
     default:
         include 'index.html';
