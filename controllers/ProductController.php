@@ -82,12 +82,12 @@ class ProductController
             $this->productModel->newCategory($categName);
 
             $categories = $this->productModel->displayCategories();
-            include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
+            include '/var/www/html/ptest/ShopHere/views/admin/categories.html';
         }
 
         else{
             $categories = $this->productModel->displayCategories();
-            include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
+            include '/var/www/html/ptest/ShopHere/views/admin/categories.html';
         }
 
     }

@@ -13,7 +13,7 @@ switch ($page) {
 
     case 'adminDashboard':
         $categories = (new Product())->displayCategories();
-        include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\adminDashboard.html';
+        include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
         break;    
 
     case 'insertProduct':
@@ -36,7 +36,7 @@ switch ($page) {
        
     case 'categories':
         $categories = (new Product())->displayCategories();
-        include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
+        include '/var/www/html/ptest/ShopHere/views/admin/categories.html';
         break;
         
     case 'productCategWise':
@@ -66,7 +66,7 @@ switch ($page) {
         
     case 'showProducts':
         $result = (new ProductController())->showProducts();
-        include 'C:\xampp\htdocs\ptest\ShopHere\views\categoryListing.html';
+        include '/ptest/ShopHere/views/categoryListing.html';
         break;         
 
     case 'admin_logout':
