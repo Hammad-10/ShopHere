@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 class Product extends Database
 {
     private $db;
