@@ -2,10 +2,11 @@
 
 <?php
 
- $host = 'localhost';
- $user = 'debian-sys-maint';
- $pass = 'JbRt9bTnasitZnAJ';
- $dbname = 'ShopHere';
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$dbname = 'ShopHere';
+
 
 // Connect to the database
 $conn = mysqli_connect($host, $user, $pass, $dbname);

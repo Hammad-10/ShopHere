@@ -92,7 +92,7 @@
     </div>
     <div class="categories-container">
         <?php while ($row = $categories->fetch_assoc()) { ?>
-            <a  href="routes.php?page=productCategWise&categoryId=<?php echo $row['categId']; ?>&categoryName=<?php echo urlencode($row['categName']); ?>" class="category-card">
+            <a class="category-card"  href="routes.php?page=productCategWise&categoryId=<?php echo $row['categId']; ?>&categoryName=<?php echo urlencode($row['categName']); ?>" >
                 
                     <?php echo $row['categName']; ?>
                 

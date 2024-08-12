@@ -6,9 +6,9 @@ ini_set('display_errors', 1);
 
 
  $host = 'localhost';
- $user = 'debian-sys-maint';
- $pass = 'JbRt9bTnasitZnAJ';
- $dbname = 'ShopHere';
+$user = 'root';
+$pass = '';
+$dbname = 'ShopHere';
 
 
 // Connect to the database

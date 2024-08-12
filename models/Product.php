@@ -74,17 +74,17 @@ class Product extends Database
         }
     }
 
-    public function insertProduct($sku, $productname, $price, $quantity, $selectedCategory)
+    public function insertProduct($sku, $productname, $price, $quantity)
     {
         try {
-            $sql = "INSERT INTO Products (sku, name, price, quantity, categId) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO Products (sku, name, price, quantity) VALUES (?, ?, ?, ?)";
             $stmt = $this->db->prepare($sql);
 
             if ($stmt === false) {
                 throw new Exception("Prepare statement failed: " . $this->db->error);
             }
 
-            $stmt->bind_param("ssiii", $sku, $productname, $price, $quantity, $selectedCategory);
+            $stmt->bind_param("ssii", $sku, $productname, $price, $quantity);
 
             $result = $stmt->execute();
 
@@ -107,9 +107,6 @@ class Product extends Database
     public function insertProductImage($sku, $imagePath)
     {
         try {
-
-
-
             // getting sno of the inserted product
             $sql = "SELECT * from `Products` where `sku`='$sku'";
             $result = $this->db->query($sql);
@@ -133,11 +130,7 @@ class Product extends Database
 
                 return true;
             }
-
-
-
-
-
+            
             // inserting Product images
 
         } catch (Exception $e) {
@@ -146,6 +139,44 @@ class Product extends Database
             return false;
         }
     }
+
+    public function linkProductToCategory($sku, $categId)
+    {
+        try {
+            // getting sno of the inserted product
+            $sql = "SELECT * from `Products` where `sku`='$sku'";
+            $result = $this->db->query($sql);
+
+            if ($result) {
+                $row = $result->fetch_assoc();
+
+                $sql = "INSERT INTO ProductCategoryLink (categId, Productsno) VALUES (?, ?)";
+                $stmt = $this->db->prepare($sql);
+
+                if (!$stmt) {
+                    throw new Exception("Prepare statement failed: " . $this->db->error);
+                }
+
+                $stmt->bind_param("ii", $categId, $row['sno']);
+
+
+                if (!$stmt->execute()) {
+                    throw new Exception("Execute failed: " . $stmt->error);
+                }
+
+                return true;
+            }
+            
+            // inserting Product images
+
+        } catch (Exception $e) {
+            // Handle the exception
+            echo 'An error occurred while updating the product: ' . $e->getMessage();
+            return false;
+        }
+    }
+
+
 
     // admin view all products
 
@@ -211,7 +242,8 @@ class Product extends Database
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>';
 
-            $sql = "SELECT * FROM Products where `categId`='$categId'";
+            $sql = "SELECT * FROM Products inner join ProductCategoryLink on `ProductCategoryLink`.`categId`= '$categId'";
+
             $result = $this->db->query($sql);
 
             if (!$result) {

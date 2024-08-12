@@ -3,8 +3,8 @@
 class Database
 {
     private $host = 'localhost';
-    private $user = 'debian-sys-maint';
-    private $pass = 'JbRt9bTnasitZnAJ';
+    private $user = 'root';
+    private $pass = '';
     private $dbname = 'ShopHere';
 
     public function __construct()

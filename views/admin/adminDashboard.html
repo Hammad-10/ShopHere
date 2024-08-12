@@ -45,21 +45,20 @@
 
         <!-- Categories Dropdown -->
         <div class="mb-3">
-            <label for="category" class="form-label">Choose Category</label>
-            <select class="form-control" id="category" name="category" required>
-                <option value="" disabled selected>Select a category</option>
+            <label for="category" class="form-label">Choose Categories</label>
+            <select class="form-control" id="category" name="category[]" multiple required>
                 <?php while ($row = $categories->fetch_assoc()) { ?>
                     <option value="<?php echo $row['categId']; ?>"><?php echo $row['categName']; ?></option>
                 <?php } ?>
             </select>
         </div>
-
+    
         <!-- SKU Field -->
         <div class="mb-3">
             <label for="sku" class="form-label">SKU</label>
             <input type="text" class="form-control" id="sku" name="sku" required>
         </div>
-
+    
         <!-- Other Fields -->
         <div class="mb-3">
             <label for="productname" class="form-label">Name</label>
@@ -77,12 +76,13 @@
             <label for="images" class="form-label">Add Product Images</label>
             <input type="file" name="images[]" id="images" multiple required>
         </div>
-
+    
         <!-- Submit Button -->
         <div class="button-group">
             <button type="submit" class="btn btn-primary btn-wide">Add Product</button>
         </div>
     </form>
+    
 
 </div>
 

@@ -2,10 +2,9 @@
 
 <?php
 
-
 $host = 'localhost';
-$user = 'debian-sys-maint';
-$pass = 'JbRt9bTnasitZnAJ';
+$user = 'root';
+$pass = '';
 $dbname = 'ShopHere';
 
 // Connect to the database
