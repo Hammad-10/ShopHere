@@ -2,10 +2,10 @@
 
 <?php
 
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$dbname = 'ShopHere';
+ $host = 'localhost';
+ $user = 'debian-sys-maint';
+ $pass = 'JbRt9bTnasitZnAJ';
+ $dbname = 'ShopHere';
 
 // Connect to the database
 $conn = mysqli_connect($host, $user, $pass, $dbname);
@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (mysqli_num_rows($result) > 0) {
 
-        session_start();
+        // session_start();
 
-        $_SESSION['adminId'] = $adminId;
+        // $_SESSION['adminId'] = $adminId;
      
         // If the user exists, send a success response
         echo json_encode(['status' => 'success', 'message' => 'Login successful']);
