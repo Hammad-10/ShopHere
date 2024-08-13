@@ -239,7 +239,7 @@ class Product extends Database
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>';
 
-            $sql = "SELECT * FROM Products inner join ProductCategoryLink on `ProductCategoryLink`.`categId`= '$categId'";
+            $sql = "SELECT * FROM Products inner join ProductCategoryLink on `Products`.`sno`=`ProductCategoryLink`.`Productsno` where `ProductCategoryLink`.`categId`= '$categId'";
 
             $result = $this->db->query($sql);
 
@@ -351,7 +351,7 @@ class Product extends Database
           <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>';
 
-            $sql = "SELECT * FROM Orders";
+            $sql = "SELECT orderId FROM Orders group by orderId";
             $result = $this->db->query($sql);
 
             if (!$result) {
@@ -367,9 +367,8 @@ class Product extends Database
                   <thead>
                       <tr>
                           <th scope="col">ORDER ID</th>
-                          <th scope="col">PRODUCT</th>
-                          <th scope="col">CUSTOMER ID</th>
-                          <th scope="col">DATE</th>
+                           <th scope="col">ACTION</th>
+                         
                       </tr>
                   </thead>
                   <tbody>';
@@ -378,9 +377,8 @@ class Product extends Database
             while ($row = $result->fetch_assoc()) {
                 $output .= '<tr>';
                 $output .= '<td>' . htmlspecialchars($row["orderId"]) . '</td>';
-                $output .= '<td>' . htmlspecialchars($row["product"]) . '</td>';
-                $output .= '<td>' . htmlspecialchars($row["customerId"]) . '</td>';
-                $output .= '<td>' . htmlspecialchars($row["datetime"]) . '</td>';
+                $output .= '<td><a href="routes.php?page=View_specificOrder&orderId=' . urlencode($row['orderId']) . '" class="view btn btn-sm btn-primary">View</a></td>';
+  
                 $output .= '</tr>';
             }
 
@@ -484,6 +482,38 @@ class Product extends Database
             return false;
         }
     }
+
+
+     // specific order for admin
+     public function displaySpecificOrder($orderId)
+     {
+         try {
+             $sql = "SELECT * FROM `Orders` WHERE `orderId` = ?";
+             $stmt = $this->db->prepare($sql);
+ 
+             if (!$stmt) {
+                 throw new Exception("Prepare statement failed: " . $this->db->error);
+             }
+ 
+             $stmt->bind_param("s", $orderId);
+ 
+             if (!$stmt->execute()) {
+                 throw new Exception("Execute failed: " . $stmt->error);
+             }
+ 
+             $result = $stmt->get_result();
+ 
+             if ($result === false) {
+                 throw new Exception("Get result failed: " . $stmt->error);
+             }
+ 
+             return $result;
+         } catch (Exception $e) {
+             // Handle the exception
+             echo 'An error occurred while fetching the product: ' . $e->getMessage();
+             return false;
+         }
+     }
 
     //specific product for customer
     public function CustomerSpecificProduct($sno)
