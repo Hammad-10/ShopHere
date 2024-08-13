@@ -70,11 +70,11 @@ document.addEventListener("navbarLoaded", () => {
 
     function updateCart() {
         cartItemsList.innerHTML = "";
-
+    
         cartItems.forEach((item, index) => {
             const cartItemDiv = document.createElement('div');
             cartItemDiv.className = 'maindiv mb-3';
-
+    
             cartItemDiv.innerHTML = `
                 <div class="imageDiv">
                     <img alt="${item.title}" class="productImage" src="${item.imageSrc}">
@@ -88,14 +88,14 @@ document.addEventListener("navbarLoaded", () => {
                     <button class="btn btn-danger btn-sm ms-2 remove-item" data-index="${index}">Remove</button>
                 </div>
             `;
-
+    
             cartItemsList.appendChild(cartItemDiv);
         });
-
+    
         // Attach event listeners for remove buttons after the cart is updated
         attachRemoveItemListeners();
     }
-
+    
     function attachRemoveItemListeners() {
         const removeButtons = document.querySelectorAll('.remove-item');
         removeButtons.forEach(button => {
@@ -107,6 +107,7 @@ document.addEventListener("navbarLoaded", () => {
             });
         });
     }
+    
 
     function showAlert(message) {
         // Create the alert element

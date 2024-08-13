@@ -6,11 +6,11 @@ document.addEventListener("navbarLoaded", () => {
 
     addToCartButtons.forEach(button => {
         button.addEventListener('click', function(event) {
-            console.log('i am in cart counter file');
+          
             event.preventDefault();
             counter++;
             if (cartCounter) {
-                console.log('i am also in cart counter file');
+          
                 cartCounter.textContent = counter;
                 // Temporarily change color to check if it updates
                 cartCounter.style.color = 'white';

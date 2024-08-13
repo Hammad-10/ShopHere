@@ -5,13 +5,7 @@
 class customerLogin extends Database
 {
 
-    private $db;
-
-    public function __construct()
-    {
-        $this->db = parent::__construct();
-    }
-
+  
     public function customerLogin()
     {
 

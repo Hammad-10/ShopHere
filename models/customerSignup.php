@@ -6,12 +6,6 @@ ini_set('display_errors', 1);
 
 class customerSignup extends Database{
 
-    private $db;
-
-    public function __construct()
-    {
-        $this->db = parent::__construct();
-    }
 
 public function customerSignup(){
 
