@@ -18,9 +18,17 @@ document.addEventListener("navbarLoaded", () => {
                 const title = productDiv.querySelector('.card-title').innerText;
                 const price = productDiv.querySelector('.card-text').innerText.replace('$', '').trim();
 
-                const item = { imageSrc, title, price };
-                cartItems.push(item);
-                updateCart();
+                // Check if the item already exists in the cart
+                const itemExists = cartItems.some(item => item.title === title);
+
+                if (!itemExists) {
+                    // If the item is not already in the cart, add it
+                    const item = { imageSrc, title, price };
+                    cartItems.push(item);
+                    updateCart();
+                } else {
+                    showAlert("Item already in cart");
+                }
             } else {
                 console.error("Product item container not found!");
             }
@@ -76,6 +84,7 @@ document.addEventListener("navbarLoaded", () => {
                     <p><strong>Price:</strong> $${item.price}</p>
                     <select title="quantity" id="quantity-${index}">
                         <option value="1">1</option>
+                     
                     </select>
                     <button class="btn btn-danger btn-sm ms-2 remove-item" data-index="${index}">Remove</button>
                 </div>
@@ -100,3 +109,25 @@ document.addEventListener("navbarLoaded", () => {
         });
     }
 });
+
+function showAlert(message) {
+    // Create the alert element
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'alert alert-warning alert-dismissible fade show';
+    alertDiv.role = 'alert';
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    // Append the alert to the body or another container
+    document.body.appendChild(alertDiv);
+
+    // Automatically remove the alert after 5 seconds
+    setTimeout(() => {
+        const alertElement = document.querySelector('.alert');
+        if (alertElement) {
+            alertElement.remove();
+        }
+    }, 5000);
+}

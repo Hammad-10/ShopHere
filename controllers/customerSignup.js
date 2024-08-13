@@ -10,7 +10,7 @@ function buttonClickHandler(event) {
     const xhr = new XMLHttpRequest();
 
     // Open the object
-    xhr.open('POST', '/ptest/ShopHere/models/customerSignup.php', true);
+    xhr.open('POST', '/ptest/ShopHere/routes.php?page=customer_Signup', true);
     xhr.setRequestHeader('Content-type', 'application/json');
 
     // What to do when response is ready
