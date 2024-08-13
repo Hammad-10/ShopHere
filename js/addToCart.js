@@ -84,7 +84,6 @@ document.addEventListener("navbarLoaded", () => {
                     <p><strong>Price:</strong> $${item.price}</p>
                     <select title="quantity" id="quantity-${index}">
                         <option value="1">1</option>
-                     
                     </select>
                     <button class="btn btn-danger btn-sm ms-2 remove-item" data-index="${index}">Remove</button>
                 </div>
@@ -108,26 +107,33 @@ document.addEventListener("navbarLoaded", () => {
             });
         });
     }
-});
 
-function showAlert(message) {
-    // Create the alert element
-    const alertDiv = document.createElement('div');
-    alertDiv.className = 'alert alert-warning alert-dismissible fade show';
-    alertDiv.role = 'alert';
-    alertDiv.innerHTML = `
-        ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    `;
-    
-    // Append the alert to the body or another container
-    document.body.appendChild(alertDiv);
-
-    // Automatically remove the alert after 5 seconds
-    setTimeout(() => {
-        const alertElement = document.querySelector('.alert');
-        if (alertElement) {
-            alertElement.remove();
+    function showAlert(message) {
+        // Create the alert element
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-warning alert-dismissible fade show';
+        alertDiv.role = 'alert';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        
+        // Append the alert to the alertmsg div
+        const alertContainer = document.querySelector('.alertmsg');
+        if (alertContainer) {
+            alertContainer.innerHTML = ""; // Clear any existing alerts
+            alertContainer.appendChild(alertDiv);
+            
+            // Automatically remove the alert after 5 seconds
+            setTimeout(() => {
+                alertDiv.classList.remove('show');
+                alertDiv.classList.add('fade');
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 150);
+            }, 5000);
+        } else {
+            console.error("Alert container not found!");
         }
-    }, 5000);
-}
+    }
+});
