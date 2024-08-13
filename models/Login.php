@@ -4,17 +4,7 @@
 
 class Login extends Database{
 
-    private $db;
-
-    public function __construct()
-    {
-        $this->db = parent::__construct();
-    }
-
-
-
 public function adminLogin(){
-
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Get the raw POST data
         $json = file_get_contents('php://input');

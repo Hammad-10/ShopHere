@@ -2,14 +2,7 @@
 
 class Product extends Database
 {
-    private $db;
-
-    public function __construct()
-    {
-        $this->db = parent::__construct();
-    }
-
-
+    
     public function newCategory($categName)
     {
 

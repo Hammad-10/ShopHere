@@ -6,6 +6,7 @@ class Database
     private $user = 'debian-sys-maint';
     private $pass = 'JbRt9bTnasitZnAJ';
     private $dbname = 'ShopHere';
+    public $db ;
 
     public function __construct()
     {
@@ -15,8 +16,9 @@ class Database
             if ($mysqli->connect_error) {
                 throw new Exception("Connection failed: " . $mysqli->connect_error);
             }
-            
-            return $mysqli;
+
+            $this->db = $mysqli;
+           
         } catch (Exception $e) {
             die('An error occurred while connecting to the database: ' . $e->getMessage());
         }

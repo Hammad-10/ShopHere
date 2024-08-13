@@ -5,12 +5,12 @@
 class Signup extends Database{
 
 
-    private $db;
+    // private $db;
 
-    public function __construct()
-    {
-        $this->db = parent::__construct();
-    }
+    // public function __construct()
+    // {
+    //     $this->db = parent::__construct();
+    // }
 
 
 public function adminSignup(){
