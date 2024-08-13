@@ -13,7 +13,7 @@ switch ($page) {
 
     case 'adminDashboard':
         $categories = (new Product())->displayCategories();
-        include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\adminDashboard.html';
+        include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
         break;    
 
     case 'insertProduct':
@@ -22,6 +22,11 @@ switch ($page) {
     case 'View_specificProduct':
         $sno = htmlspecialchars($_GET['sno']);
         (new ProductController())->specificProduct($sno);
+        break;
+    
+    case 'View_specificOrder':
+        $orderId = htmlspecialchars($_GET['orderId']);
+        (new ProductController())->specificOrder($orderId);
         break;
         
     case 'Customer_specificProduct':
@@ -36,7 +41,7 @@ switch ($page) {
        
     case 'categories':
         $categories = (new Product())->displayCategories();
-        include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
+        include '/var/www/html/ptest/ShopHere/views/admin/categories.html';
         break;
         
     case 'productCategWise':
@@ -66,7 +71,7 @@ switch ($page) {
         
     case 'showProducts':
         $result = (new ProductController())->showProducts();
-        include '/ptest/ShopHere/views/categoryListing.html';
+        include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
         break;         
 
     case 'admin_logout':
@@ -79,7 +84,7 @@ switch ($page) {
         
     case 'checkout':
         $orders = (new Product())->checkoutOrdersInfo();
-        include '/ptest/ShopHere/views/checkout.html';
+        include '/var/www/html/ptest/ShopHere/views/checkout.html';
         break;
 
     default:

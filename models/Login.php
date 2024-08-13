@@ -3,8 +3,8 @@
 <?php
 
 $host = 'localhost';
-$user = 'root';
-$pass = '';
+$user = 'debian-sys-maint';
+$pass = 'JbRt9bTnasitZnAJ';
 $dbname = 'ShopHere';
 
 

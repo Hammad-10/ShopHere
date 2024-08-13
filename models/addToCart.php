@@ -5,10 +5,9 @@
 session_start();
 
 $host = 'localhost';
-$user = 'root';
-$pass = '';
+$user = 'debian-sys-maint';
+$pass = 'JbRt9bTnasitZnAJ';
 $dbname = 'ShopHere';
-
 // Connect to the database
 $conn = mysqli_connect($host, $user, $pass, $dbname);
 

@@ -82,12 +82,13 @@ class ProductController
             $this->productModel->newCategory($categName);
 
             $categories = $this->productModel->displayCategories();
-            include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
+            include '/var/www/html/ptest/ShopHere/views/admin/categories.html';
+            
         }
 
         else{
             $categories = $this->productModel->displayCategories();
-            include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
+            include '/var/www/html/ptest/ShopHere/views/admin/categories.html';
         }
 
     }
@@ -131,6 +132,15 @@ class ProductController
                     }
                 }
             }
+            
+            echo '
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> Product Inserted
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+            
+
+            // include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
         }
     }
     
@@ -142,7 +152,7 @@ class ProductController
     }
 
 
-
+    // admin view specific product
     public function specificProduct($sno)
     {
         try {
@@ -159,6 +169,20 @@ class ProductController
                 header('Location: /ptest/ShopHere/views/admin/viewSpecificProduct.php');
                 exit();
             }
+        } catch (Exception $e) {
+            // Handle the exception
+            $error = 'An error occurred: ' . $e->getMessage();
+            exit();
+        }
+    }
+
+    // admin view specific order
+    public function specificOrder($orderId)
+    {
+        try {
+            $result = $this->productModel->displaySpecificOrder($orderId);
+            include '/var/www/html/ptest/ShopHere/views/admin/viewSpecificOrder.html';
+           
         } catch (Exception $e) {
             // Handle the exception
             $error = 'An error occurred: ' . $e->getMessage();
@@ -185,7 +209,7 @@ class ProductController
                 // echo $_SESSION['sku'];
 
                 // i am here now just take data to customer/Product.html
-                include '/ptest/ShopHere/views/Product.html';
+                include '/var/www/html/ptest/ShopHere/views/Product.html';
                 
                 // header('Location: /ptest/ShopHere/views/');
                 exit();
@@ -237,7 +261,14 @@ class ProductController
             $resultupdate = $this->productModel->updateProduct($sno, $sku, $name, $price, $quantity);
 
             if ($resultupdate) {
-                echo 'Product updated';
+                
+                echo '
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Product Updated
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+                
+                
             } else {
                 throw new Exception('Error updating product');
             }
@@ -255,7 +286,12 @@ class ProductController
             $resultdelete = $this->productModel->deleteProduct($sno);
 
             if ($resultdelete) {
-                echo 'Product deleted';
+                echo '
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Product Deleted
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>';
+                
             } else {
                 throw new Exception('Error deleting product');
             }
