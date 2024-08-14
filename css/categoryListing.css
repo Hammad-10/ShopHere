@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
+    text-decoration: none;
 }
 
 .product-item {
@@ -77,5 +78,9 @@
 }
 
 .productName{
+    text-decoration: none;
+}
+
+.product-link{
     text-decoration: none;
 }
