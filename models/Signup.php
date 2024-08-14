@@ -4,8 +4,8 @@
 
 
 $host = 'localhost';
-$user = 'debian-sys-maint';
-$pass = 'JbRt9bTnasitZnAJ';
+$user = 'root';
+$pass = 'MyStrongPassword1234$';
 $dbname = 'ShopHere';
 
 // Connect to the database
