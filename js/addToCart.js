@@ -35,12 +35,28 @@ document.addEventListener("navbarLoaded", () => {
         });
     });
 
-    cartIcon.addEventListener("click", () => {
+    cartIcon.addEventListener("click", (e) => {
+        e.preventDefault();
+    
         const cartModal = document.getElementById('cartModal');
-        const bsOffcanvas = new bootstrap.Offcanvas(cartModal);
-        bsOffcanvas.show();
+        if (cartModal) {
+            // Destroy existing instance if any to avoid conflicts
+            const existingInstance = bootstrap.Offcanvas.getInstance(cartModal);
+            if (existingInstance) {
+                existingInstance.dispose();
+            }
+    
+            // Initialize a new Offcanvas instance
+            const bsOffcanvas = new bootstrap.Offcanvas(cartModal, {
+                backdrop: true, // Set the backdrop to true explicitly
+                keyboard: true, // Allow closing with escape key
+            });
+    
+            bsOffcanvas.show();
+        } else {
+            console.error("Cart modal not found!");
+        }
     });
-
     clearCartButton?.addEventListener("click", () => {
         cartItems = [];
         updateCart();
@@ -68,6 +84,7 @@ document.addEventListener("navbarLoaded", () => {
         }
     });
 
+
     function updateCart() {
         cartItemsList.innerHTML = "";
     
@@ -84,6 +101,7 @@ document.addEventListener("navbarLoaded", () => {
                     <p><strong>Price:</strong> $${item.price}</p>
                     <select title="quantity" id="quantity-${index}">
                         <option value="1">1</option>
+                        <!-- Add more options as needed -->
                     </select>
                     <button class="btn btn-danger btn-sm ms-2 remove-item" data-index="${index}">Remove</button>
                 </div>
@@ -92,19 +110,22 @@ document.addEventListener("navbarLoaded", () => {
             cartItemsList.appendChild(cartItemDiv);
         });
     
-        // Attach event listeners for remove buttons after the cart is updated
-        attachRemoveItemListeners();
-    }
-    
-    function attachRemoveItemListeners() {
-        const removeButtons = document.querySelectorAll('.remove-item');
-        removeButtons.forEach(button => {
-            button.addEventListener("click", (e) => {
-                console.log('remove btn clicked');
+        // Attach event listener to the parent container using event delegation
+        cartItemsList.addEventListener('click', function (e) {
+            // Check if the clicked element is the remove button
+            if (e.target && e.target.classList.contains('remove-item')) {
                 const index = e.target.getAttribute('data-index');
                 cartItems.splice(index, 1);
                 updateCart(); // Re-render the cart with updated indices
-            });
+            }
+    
+            // Handle quantity change if the quantity dropdown is clicked
+            if (e.target && e.target.tagName === 'SELECT' && e.target.title === 'quantity') {
+                const index = e.target.id.split('-')[1];
+                const selectedQuantity = e.target.value;
+                console.log(`Quantity for item ${index} changed to ${selectedQuantity}`);
+                // Implement any logic you need to update the item quantity in cartItems
+            }
         });
     }
     
