@@ -10,9 +10,11 @@ function buttonClickHandler(event) {
     const xhr = new XMLHttpRequest();
 
     // Open the object
-    xhr.open('POST', '/ptest/ShopHere/models/Login.php', true);
-    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.open('POST', '/ptest/ShopHere/routes.php?page=admin_Login', true);
 
+
+    // Set the request header to indicate that you're sending JSON data
+    xhr.setRequestHeader('Content-Type', 'application/json');
     // What to do when response is ready
     xhr.onload = function () {
         if (this.status === 200) {

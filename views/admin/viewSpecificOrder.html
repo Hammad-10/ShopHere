@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .orderDetailsHeading{
+            align-self: center;
+        }
+    </style>
+</head>
+<body>
+
+<h2 class="orderDetailsHeading">Order Details</h2>
+
+<h4>Status: <h6>Order dispatched</h6></h4>
+
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+       
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row['product'] . "</td>";
+            echo "<td>" . $row['price'] . "</td>";
+            echo "<td>" . $row['datetime'] . "</td>";
+            echo "</tr>";
+        }
+        ?>
+    </tbody>
+</table>
+
+
+
+</body>
+</html>

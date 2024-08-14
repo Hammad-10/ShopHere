@@ -3,6 +3,10 @@ session_start();
 
 require 'models/Database.php';
 require 'models/Product.php';
+require 'models/Login.php';
+require 'models/Signup.php';
+require 'models/customerLogin.php';
+require 'models/customerSignup.php';
 
 require 'controllers/ProductController.php';
 require 'controllers/AuthController.php';
@@ -22,6 +26,11 @@ switch ($page) {
     case 'View_specificProduct':
         $sno = htmlspecialchars($_GET['sno']);
         (new ProductController())->specificProduct($sno);
+        break;
+    
+    case 'View_specificOrder':
+        $orderId = htmlspecialchars($_GET['orderId']);
+        (new ProductController())->specificOrder($orderId);
         break;
         
     case 'Customer_specificProduct':
@@ -72,6 +81,23 @@ switch ($page) {
     case 'admin_logout':
         (new AuthController())->adminLogout();
         break; 
+
+        
+    case 'admin_Login':
+        (new Login())->adminLogin();
+        break;
+
+    case 'admin_Signup':
+        (new Signup())->adminSignup();
+        break;  
+
+    case 'customer_Login':
+        (new customerLogin())->customerLogin();
+        break;
+
+    case 'customer_Signup':
+        (new customerSignup())->customerSignup();
+        break;
 
     case 'customer_logout':
         (new AuthController())->customerLogout();
