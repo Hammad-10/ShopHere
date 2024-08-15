@@ -58,9 +58,10 @@ switch ($page) {
 
         // customer view products category wise   
     case 'productCategWiseCustomer':
-        $orderitems = (new Product())->getOrderItems();
+       
         $categId = htmlspecialchars($_GET['categoryId']);
         $categName = htmlspecialchars($_GET['categoryName']);
+        $orderitems = (new Product())->getOrderItems();
         $result = (new ProductController())->productCategWiseCustomer($categId, $categName);
         include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
 
