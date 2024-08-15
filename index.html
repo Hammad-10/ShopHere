@@ -52,12 +52,16 @@ products that you will surely love.
         <div id="div3">
             <h2 id="organicSelectionHeading">Organic Selection</h2>
             <div class="organicProducts">
-                <div class="product">
-                    <img src="assets/Images/BeautyCraftsSources/7.webp" alt="Organic Product 1" class="productImage">
-                    <h3 class="productTitle">Organic Lotion</h3>
-                    <p class="productDescription">A luxurious lotion made from all-natural ingredients.</p>
-                </div>
-                <div class="product">
+
+                <?php while ($row = $categories->fetch_assoc()) { ?>
+                    <a class="product"  href="routes.php?page=productCategWiseCustomer&categoryId=<?php echo $row['categId']; ?>&categoryName=<?php echo urlencode($row['categName']); ?>">
+                        <img src="assets/Images/BeautyCraftsSources/7.webp" alt="Organic Product 1" class="productImage">
+                        <h3 class="productTitle"> <?php echo $row['categName']; ?></h3>
+                        <p class="productDescription">A luxurious lotion made from all-natural ingredients.</p>
+                    </a>
+                <?php } ?>
+               
+                <!-- <div class="product">
                     <img src="assets/Images/BeautyCraftsSources/6.webp" alt="Organic Product 2" class="productImage">
                     <h3 class="productTitle">Organic Soaps</h3>
                     <p class="productDescription">Keep your hair healthy and shiny with our herbal shampoo.</p>
@@ -66,7 +70,7 @@ products that you will surely love.
                     <img src="assets/Images/BeautyCraftsSources/5.webp" alt="Organic Product 3" class="productImage">
                     <h3 class="productTitle">Soy Candles</h3>
                     <p class="productDescription">Experience the freshness of nature with our natural soap.</p>
-                </div>
+                </div> -->
             </div>
         </div>
 

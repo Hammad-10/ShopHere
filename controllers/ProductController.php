@@ -28,6 +28,13 @@ class ProductController
 
     }
 
+       // customer view all products category wise
+       public function productCategWiseCustomer($categId, $categName){
+         return $this->productModel->displayProdCategWiseCustomer($categId, $categName);
+         
+
+    }
+
     // admin view all customers
     public function viewAllCustomers(){
         echo $this->productModel->displayCustomers();
@@ -45,9 +52,6 @@ class ProductController
     // customer view all products
     public function showProducts()
     {
-    
-      
-
         return $this->productModel->displayProducts();
 
         include '/ptest/ShopHere/views/footer.html';
@@ -159,6 +163,8 @@ class ProductController
             $result = $this->productModel->displaySpecificProduct($sno);
             if ($result) {
                 // session_start();
+                // $_SESSION['categId'] = $result['categId'];
+                $_SESSION['categoryName'] = $result['categName'];
                 $_SESSION['sno'] = $result['sno'];
                 $_SESSION['sku'] = $result['sku'];
                 $_SESSION['name'] = $result['name'];
@@ -227,6 +233,8 @@ class ProductController
     {
         try {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // $categId = $_POST['categId'];
+                $categName = $_POST['categoryName'];
                 $sno = $_POST['sno'];
                 $action = $_POST['action'];
 
@@ -238,7 +246,7 @@ class ProductController
 
                 if ($action == 'update') {
                    
-                    $this->updateProduct($sno, $sku, $name, $price, $quantity);
+                    $this->updateProduct($categName, $sno, $sku, $name, $price, $quantity);
 
                 } else if ($action == 'delete') {
                     $this->deleteProduct($sno);
@@ -255,10 +263,10 @@ class ProductController
         }
     }
 
-    private function updateProduct($sno, $sku, $name, $price, $quantity)
+    private function updateProduct($categName, $sno, $sku, $name, $price, $quantity)
     {
         try {
-            $resultupdate = $this->productModel->updateProduct($sno, $sku, $name, $price, $quantity);
+            $resultupdate = $this->productModel->updateProduct($categName, $sno, $sku, $name, $price, $quantity);
 
             if ($resultupdate) {
                 

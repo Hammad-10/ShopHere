@@ -18,7 +18,7 @@ switch ($page) {
     case 'adminDashboard':
         $categories = (new Product())->displayCategories();
         include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
-        break;    
+        break;
 
     case 'insertProduct':
         (new ProductController())->insertProduct();
@@ -27,12 +27,13 @@ switch ($page) {
         $sno = htmlspecialchars($_GET['sno']);
         (new ProductController())->specificProduct($sno);
         break;
-    
+
+        //admin view specific order
     case 'View_specificOrder':
         $orderId = htmlspecialchars($_GET['orderId']);
         (new ProductController())->specificOrder($orderId);
         break;
-        
+
     case 'Customer_specificProduct':
         $sno = htmlspecialchars($_GET['sno']);
         (new ProductController())->Customer_specificProduct($sno);
@@ -42,24 +43,35 @@ switch ($page) {
         $categId = htmlspecialchars($_GET['categoryId']);
         (new ProductController())->deleteCategory($categId);
         break;
-       
+
     case 'categories':
         $categories = (new Product())->displayCategories();
         include '/var/www/html/ptest/ShopHere/views/admin/categories.html';
         break;
-        
+
+        // admin view products category wise   
     case 'productCategWise':
         $categId = htmlspecialchars($_GET['categoryId']);
         $categName = htmlspecialchars($_GET['categoryName']);
         (new ProductController())->productCategWise($categId, $categName);
-        break;   
-        
+        break;
+
+        // customer view products category wise   
+    case 'productCategWiseCustomer':
+        $orderitems = (new Product())->getOrderItems();
+        $categId = htmlspecialchars($_GET['categoryId']);
+        $categName = htmlspecialchars($_GET['categoryName']);
+        $result = (new ProductController())->productCategWiseCustomer($categId, $categName);
+        include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
+
+        break;
+
     case 'update_delete':
         (new ProductController())->updateDelete();
         break;
     case 'viewAllProducts':
         (new ProductController())->viewAllProducts();
-        break; 
+        break;
 
     case 'viewAllCustomers':
         (new ProductController())->viewAllCustomers();
@@ -71,27 +83,27 @@ switch ($page) {
 
     case 'addNewCategory':
         (new ProductController())->addNewCategory();
-        break; 
-        
+        break;
+
     case 'showProducts':
 
         $orderitems = (new Product())->getOrderItems();
         $result = (new ProductController())->showProducts();
         include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
-        break;         
+        break;
 
     case 'admin_logout':
         (new AuthController())->adminLogout();
-        break; 
+        break;
 
-        
+
     case 'admin_Login':
         (new Login())->adminLogin();
         break;
 
     case 'admin_Signup':
         (new Signup())->adminSignup();
-        break;  
+        break;
 
     case 'customer_Login':
         (new customerLogin())->customerLogin();
@@ -105,14 +117,14 @@ switch ($page) {
         (new AuthController())->customerLogout();
         break;
 
-    // case 'miniCart':
+        // case 'miniCart':
 
-      
-    //     $orderitems = (new Product())->getOrderItems();
-     
-    //     include '/var/www/html/ptest/ShopHere/views/miniCart.html';
-    //     break;       
-        
+
+        //     $orderitems = (new Product())->getOrderItems();
+
+        //     include '/var/www/html/ptest/ShopHere/views/miniCart.html';
+        //     break;       
+
     case 'checkout':
         $orders = (new Product())->checkoutOrdersInfo();
         include '/var/www/html/ptest/ShopHere/views/checkout.html';
@@ -121,12 +133,13 @@ switch ($page) {
     case 'placeOrder':
         (new Product())->updateOrders();
         include '/var/www/html/ptest/ShopHere/views/orderSuccessFailure.html';
-        break;        
+        break;
 
 
 
-    default:
+    case 'index':
+        $categories = (new Product())->displayCategoriesCustomer();
+
         include 'index.html';
         break;
 }
-?>
