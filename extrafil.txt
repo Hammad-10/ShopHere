@@ -1018,3 +1018,189 @@ document.ready(function(){
         });
     });
 })
+
+
+
+=======
+  aria-labelledby="staticBackdropLabel">
+ <div class="offcanvas-header">
+     <h5 class="offcanvas-title" id="staticBackdropLabel">Cart</h5>
+     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+ </div>
+ <div class="offcanvas-body">
+     <!-- Cart content goes here -->
+     <div id="cartItemsList"></div>
+ </div>
+
+ <div class="btnsDiv"
+ style="display: flex; flex-direction:column; justify-content: space-between; align-self: center;">
+ <a href="/ptest/ShopHere/views/checkout.html" class="checkoutBtn" style="background-color: black;
+ color: white;">Checkout</a>
+ <a href="#" class="continueShopBtn" style="   background-color: white;
+ color: black;
+ border: 1px solid black;">Continue Shopping</a>
+</div>
+</div>
+   
+  
+>>>>>>> master
+
+
+LATEST categoryListing.html:
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/categoryListing.css">
+  <link rel="stylesheet" href="../css/miniCart.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <script src="/ptest/ShopHere/js/LoadComponent.js"></script>
+
+
+
+
+  <title>Product Grid</title>
+</head>
+
+<body>
+
+
+
+  <div id="navbar">
+
+
+  </div>
+
+  <div class="alertmsg">
+
+  </div>
+
+
+
+
+  <!-- product-grid -->
+  <div class="product-grid mt-5">
+    <div class="container">
+      <div class="row">
+        <?php while ($row = $result->fetch_assoc()) { 
+        $imagepaths = explode(',', $row['images']); // Split the images into an array
+        $firstImage = $imagepaths[0]; // Get the first image from the array
+        ?>
+        <div class="col-md-4">
+          <div class="product-item">
+            <a href="routes.php?page=Customer_specificProduct&sno=<?php echo urlencode($row['sno']); ?>"
+              class="product-link">
+              <div class="card mb-4 text-center"> <!-- Added text-center class for horizontal centering -->
+                <div class="card-img-wrapper d-flex justify-content-center align-items-center" style="height: 150px;">
+                  <!-- Adjust height as needed -->
+                  <img class="productImage" src="<?php echo htmlspecialchars($firstImage); ?>"
+                    style="height: 150px; width: 150px;" alt="<?php echo htmlspecialchars($row['name']); ?>">
+                  <!-- Image centered -->
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title" style="text-decoration: none;">
+                    <?php echo htmlspecialchars($row['name']); ?>
+                  </h5>
+                  <p class="card-text">$
+                    <?php echo htmlspecialchars($row['price']); ?>
+                  </p>
+                  <a href="#" class="btn btn-primary add-to-cart" data-product-sno="<?php echo $row['sno']; ?>"
+                    data-product-price="<?php echo $row['price']; ?>">
+                    Add to Cart</a>
+
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <?php } ?>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- miniCart -->
+  <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="cartModal"
+    aria-labelledby="staticBackdropLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="staticBackdropLabel">Cart</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-body">
+          <div id="cartItemsList">
+
+            <!-- Cart items will be dynamically added here -->
+            <?php while($row = $orderitems->fetch_assoc()){ 
+  $imagepaths = explode(',', $row['image']); // Split the images into an array
+$firstImage = $imagepaths[0]; // Get the first image from the array
+?>
+            <div class="imageDiv">
+              <img alt="image" class="productImage" src="<?php echo htmlspecialchars($firstImage); ?>">
+            </div>
+            <div class="productDetailsdiv">
+              <h5>
+                <?php echo $row['name']; ?>
+              </h5>
+              <p><strong>Price:</strong>
+                <?php echo $row['price']; ?>
+              </p>
+              <select title="quantity" id="quantity-<?php echo $index; ?>">
+                <option value="1">1</option>
+              </select>
+              <button class="btn btn-danger btn-sm ms-2 remove-item" data-index="<?php echo $index; ?>">Remove</button>
+            </div>
+            <?php } ?>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btnsDiv"
+      style="display: flex; flex-direction:column; justify-content: space-between; align-self: center;">
+      <a href="/ptest/ShopHere/routes.php?page=checkout" class="checkoutBtn" style="background-color: black;
+    color: white;">Checkout</a>
+      <a href="#" class="continueShopBtn" style="background-color: white;
+    color: black;
+    border: 1px solid black;">Continue Shopping</a>
+    </div>
+  </div>
+
+
+
+
+  <footer id="footer">
+
+    <!-- Copyright -->
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+
+  <script src="/ptest/ShopHere/js/LoadComponent.js"></script>
+
+  <script src="/ptest/ShopHere/js/cartCounter.js"></script>
+
+  <!-- <script src="/ptest/ShopHere/js/addToCart.js"> </script> -->
+
+  <script src="/ptest/ShopHere/js/cartajax.js"></script>
+
+  
+
+
+
+</body>
+
+</html>

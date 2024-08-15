@@ -29,6 +29,9 @@ error_reporting(E_ALL);
             <!-- Hidden input to store the sno -->
             <input type="hidden" name="sno" value="<?php echo htmlspecialchars($_SESSION['sno']); ?>">
 
+              <!-- Hidden input to store the categId -->
+              <!-- <input type="hidden" name="categId" value="<?php echo htmlspecialchars($_SESSION['categId']); ?>"> -->
+
             <!-- checking if the image is already set then don't show the choose image option -->
             <?php
             if (isset($_SESSION['image']))
@@ -36,10 +39,12 @@ error_reporting(E_ALL);
         
             ?>
 
+            
+
              <!-- Category field -->
              <div class="form-group">
-                <label for="category">CATEGORY:</label>
-                <input type="text" id="category" name="category" class="form-control" value="<?php echo htmlspecialchars($_SESSION['sku']); ?>">
+                <label for="categoryName">CATEGORY:</label>
+                <input type="text" id="categoryName" name="categoryName" class="form-control" value="<?php echo htmlspecialchars($_SESSION['categoryName']); ?>">
             </div>
 
             <!-- SKU field -->

@@ -159,6 +159,8 @@ class ProductController
             $result = $this->productModel->displaySpecificProduct($sno);
             if ($result) {
                 // session_start();
+                // $_SESSION['categId'] = $result['categId'];
+                $_SESSION['categoryName'] = $result['categName'];
                 $_SESSION['sno'] = $result['sno'];
                 $_SESSION['sku'] = $result['sku'];
                 $_SESSION['name'] = $result['name'];
@@ -227,6 +229,8 @@ class ProductController
     {
         try {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // $categId = $_POST['categId'];
+                $categName = $_POST['categoryName'];
                 $sno = $_POST['sno'];
                 $action = $_POST['action'];
 
@@ -238,7 +242,7 @@ class ProductController
 
                 if ($action == 'update') {
                    
-                    $this->updateProduct($sno, $sku, $name, $price, $quantity);
+                    $this->updateProduct($categName, $sno, $sku, $name, $price, $quantity);
 
                 } else if ($action == 'delete') {
                     $this->deleteProduct($sno);
@@ -255,10 +259,10 @@ class ProductController
         }
     }
 
-    private function updateProduct($sno, $sku, $name, $price, $quantity)
+    private function updateProduct($categName, $sno, $sku, $name, $price, $quantity)
     {
         try {
-            $resultupdate = $this->productModel->updateProduct($sno, $sku, $name, $price, $quantity);
+            $resultupdate = $this->productModel->updateProduct($categName, $sno, $sku, $name, $price, $quantity);
 
             if ($resultupdate) {
                 
