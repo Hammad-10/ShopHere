@@ -597,3 +597,29 @@ document.ready(function(){
         });
     });
 })
+
+
+
+=======
+  aria-labelledby="staticBackdropLabel">
+ <div class="offcanvas-header">
+     <h5 class="offcanvas-title" id="staticBackdropLabel">Cart</h5>
+     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+ </div>
+ <div class="offcanvas-body">
+     <!-- Cart content goes here -->
+     <div id="cartItemsList"></div>
+ </div>
+
+ <div class="btnsDiv"
+ style="display: flex; flex-direction:column; justify-content: space-between; align-self: center;">
+ <a href="/ptest/ShopHere/views/checkout.html" class="checkoutBtn" style="background-color: black;
+ color: white;">Checkout</a>
+ <a href="#" class="continueShopBtn" style="   background-color: white;
+ color: black;
+ border: 1px solid black;">Continue Shopping</a>
+</div>
+</div>
+   
+  
+>>>>>>> master
