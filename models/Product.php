@@ -41,11 +41,37 @@ class Product extends Database
         $result = $this->db->query($sql);
     }
 
+
+    //display categories to admin
     public function displayCategories()
     {
 
         try {
             $sql = "SELECT * from `ProductCategories`";
+            $result = $this->db->query($sql);
+
+            if (!$result) {
+                throw new Exception("Query failed: " . $this->db->error);
+            }
+
+            return $result;
+        } catch (Exception $e) {
+            // Handle the exception
+            $error = 'An error occurred while inserting the product: ' . $e->getMessage();
+
+            // Optionally, log the error or display it
+            echo '<div style="color: red;">' . htmlspecialchars($error) . '</div>';
+
+            return false;
+        }
+    }
+
+    //display categories to customer
+    public function displayCategoriesCustomer()
+    {
+
+        try {
+            $sql = "SELECT * from `ProductCategories` limit 3";
             $result = $this->db->query($sql);
 
             if (!$result) {
@@ -277,6 +303,27 @@ class Product extends Database
     }
 
 
+     // customer view all products category wise
+
+     public function displayProdCategWiseCustomer($categId, $categName)
+     {
+         try {
+             $bootstrapLinks = '
+                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>';
+ 
+             $sql = "SELECT * FROM Products inner join ProductCategoryLink on `Products`.`sno`=`ProductCategoryLink`.`Productsno` inner join `ProductImages` on `ProductImages`.`sno` = `ProductCategoryLink`.`Productsno`  where `ProductCategoryLink`.`categId`= '$categId'";
+ 
+             $result = $this->db->query($sql);
+             return $result;
+         } catch (Exception $e) {
+             // Handle the exception
+             return 'An error occurred while displaying products: ' . $e->getMessage();
+         }
+     }
+ 
+
 
 
     // admin view all customers
@@ -428,7 +475,7 @@ class Product extends Database
         try {
 
 
-            $sql = "SELECT p.sno, p.sku, p.name, p.price, GROUP_CONCAT(pi.image) AS images
+            $sql = "SELECT p.sno, p.sku, p.name, p.price, GROUP_CONCAT(pi.image) AS image
                     FROM Products p
                     LEFT JOIN ProductImages pi ON p.sno = pi.sno
                     GROUP BY p.sno, p.sku, p.name, p.price";

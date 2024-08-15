@@ -20,7 +20,7 @@ function buttonClickHandler(event) {
             let response = JSON.parse(this.responseText);
             if (response.status === 'success') {
                 // Redirect to login page
-                window.location.href = '/ptest/ShopHere/index.html';
+                window.location.href = '/ptest/ShopHere/routes.php?page=index';
             } else {
                 console.log(response.message);
             }

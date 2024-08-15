@@ -28,6 +28,13 @@ class ProductController
 
     }
 
+       // customer view all products category wise
+       public function productCategWiseCustomer($categId, $categName){
+         return $this->productModel->displayProdCategWiseCustomer($categId, $categName);
+         
+
+    }
+
     // admin view all customers
     public function viewAllCustomers(){
         echo $this->productModel->displayCustomers();
@@ -45,9 +52,6 @@ class ProductController
     // customer view all products
     public function showProducts()
     {
-    
-      
-
         return $this->productModel->displayProducts();
 
         include '/ptest/ShopHere/views/footer.html';
