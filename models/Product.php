@@ -2,7 +2,7 @@
 
 class Product extends Database
 {
-    
+
     public function newCategory($categName)
     {
 
