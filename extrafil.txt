@@ -1006,3 +1006,15 @@ document.addEventListener("navbarLoaded", () => {
     }
 
     
+document.ready(function(){
+    console.log('document is ready');
+    const removeButtons = document.querySelectorAll('.remove-item');
+    removeButtons.forEach(button => {
+        button.addEventListener("click", (e) => {
+            console.log('remove btn clicked');
+            const index = e.target.getAttribute('data-index');
+            cartItems.splice(index, 1);
+            updateCart(); // Re-render the cart with updated indices
+        });
+    });
+})

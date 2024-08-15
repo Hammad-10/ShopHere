@@ -18,12 +18,12 @@ public function customerSignup(){
         $data = json_decode($json, true);
     
         // Extract username and password from the decoded data
-        $customerId = $data['customerId'];
+    
         $customerName = $data['customerName'];
         $customerPassword = $data['customerPassword'];
     
         // Construct the SQL query to insert the new user
-        $sql = "INSERT INTO Customer (customerId, customerName, CustomerPassword) VALUES ('$customerId', '$customerName', '$customerPassword')";
+        $sql = "INSERT INTO Customer (customerName, CustomerPassword) VALUES ('$customerName', '$customerPassword')";
     
         // Execute the SQL query
         $result = $this->db->query($sql);

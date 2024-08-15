@@ -74,6 +74,8 @@ switch ($page) {
         break; 
         
     case 'showProducts':
+
+        $orderitems = (new Product())->getOrderItems();
         $result = (new ProductController())->showProducts();
         include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
         break;         
@@ -102,11 +104,26 @@ switch ($page) {
     case 'customer_logout':
         (new AuthController())->customerLogout();
         break;
+
+    // case 'miniCart':
+
+      
+    //     $orderitems = (new Product())->getOrderItems();
+     
+    //     include '/var/www/html/ptest/ShopHere/views/miniCart.html';
+    //     break;       
         
     case 'checkout':
         $orders = (new Product())->checkoutOrdersInfo();
         include '/var/www/html/ptest/ShopHere/views/checkout.html';
         break;
+
+    case 'placeOrder':
+        (new Product())->updateOrders();
+        include '/var/www/html/ptest/ShopHere/views/orderSuccessFailure.html';
+        break;        
+
+
 
     default:
         include 'index.html';

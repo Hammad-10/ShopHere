@@ -4,7 +4,6 @@
 
 class Signup extends Database{
 
-
 public function adminSignup(){
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -27,6 +26,8 @@ public function adminSignup(){
     
         // Check the result of the query
         if ($result) {
+
+            
             // If the query was successful, send a success response
             echo json_encode(['status' => 'success', 'message' => 'User registered successfully']);
         } else {

@@ -36,6 +36,12 @@ error_reporting(E_ALL);
         
             ?>
 
+             <!-- Category field -->
+             <div class="form-group">
+                <label for="category">CATEGORY:</label>
+                <input type="text" id="category" name="category" class="form-control" value="<?php echo htmlspecialchars($_SESSION['sku']); ?>">
+            </div>
+
             <!-- SKU field -->
             <div class="form-group">
                 <label for="sku">SKU:</label>

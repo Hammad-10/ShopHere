@@ -240,8 +240,6 @@ class Product extends Database
                 throw new Exception("Query failed: " . $this->db->error);
             }
 
-
-
             echo '<h3 style = "margin-left:550px; margin-top: 25px; margin-bottom:25px">' . $categName . '</h3>';
 
             // Start generating the output
@@ -394,10 +392,15 @@ class Product extends Database
     {
         try {
 
-            $customerId = $_SESSION['customerId'];
+         
 
-            $sql = "SELECT * from `Orders` where `customerId`='$customerId'";
-            $result = $this->db->query($sql); 
+            $cust_id = $_SESSION['customerId'];
+            $sql = "SELECT Products.*, ProductImages.image, OrderItems.*
+            FROM Products
+            INNER JOIN ProductImages ON Products.sno = ProductImages.sno
+            INNER JOIN OrderItems ON Products.sno = OrderItems.product_sno inner join `Orders` on `Orders`.`order_sno` = `OrderItems`.`order_sno` where `Orders`.`cust_id` = '$cust_id'";
+            
+            $result = $this->db->query($sql);
 
             if (!$result) {
                 throw new Exception("Query failed: " . $this->db->error);
@@ -423,10 +426,7 @@ class Product extends Database
     public function displayProducts()
     {
         try {
-            $bootstrapLinks = '
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>';
+
 
             $sql = "SELECT p.sno, p.sku, p.name, p.price, GROUP_CONCAT(pi.image) AS images
                     FROM Products p
@@ -594,5 +594,43 @@ class Product extends Database
             echo 'An error occurred while deleting the product: ' . $e->getMessage();
             return false;
         }
+    }
+
+    
+
+    public function getOrderItems(){
+
+        try {
+
+            $cust_id = $_SESSION['customerId'];
+            $sql = "SELECT Products.*, ProductImages.image, OrderItems.*
+            FROM Products
+            INNER JOIN ProductImages ON Products.sno = ProductImages.sno
+            INNER JOIN OrderItems ON Products.sno = OrderItems.product_sno inner join `Orders` on `Orders`.`order_sno` = `OrderItems`.`order_sno` where `Orders`.`cust_id` = '$cust_id'";
+            
+            $result = $this->db->query($sql);
+
+            if (!$result) {
+                throw new Exception("Query failed: " . $this->db->error);
+            }
+
+            return $result;
+        } catch (Exception $e) {
+            // Handle the exception
+            return 'An error occurred while displaying products: ' . $e->getMessage();
+        }
+
+    } 
+
+    public function updateOrders(){
+        $cust_id = $_SESSION['customerId'];
+        $total = $_SESSION['total'];
+
+        $sql = "UPDATE `Orders` set `status`='placed', `grandTotal` = '$total' where `cust_id`='$cust_id'";
+        $result = $this->db->query($sql);
+
+        $sql1 = "DELETE from `OrderItems`";
+        $result1 = $this->db->query($sql1);
+
     }
 }

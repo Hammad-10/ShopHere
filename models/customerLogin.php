@@ -5,7 +5,7 @@
 class customerLogin extends Database
 {
 
-  
+
     public function customerLogin()
     {
 
@@ -17,17 +17,39 @@ class customerLogin extends Database
             $data = json_decode($json, true);
 
             // Extract username and password from the decoded data
-            $customerId = $data['customerId'];
+            $customerName = $data['customerName'];
             $customerPassword = $data['customerPassword'];
 
-            $sql = "SELECT * FROM Customer WHERE customerId='$customerId' AND CustomerPassword='$customerPassword'";
+
+
+
+
+            $sql = "SELECT * FROM Customer WHERE customerName='$customerName' AND CustomerPassword='$customerPassword'";
             $result = $this->db->query($sql);
 
-            if ($result->num_rows > 0) {
 
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
                 // session_start();
+                $customerId = $row['customerId'];
 
                 $_SESSION['customerId'] = $customerId;
+
+
+                $sqlO = "SELECT * FROM `Orders` WHERE `cust_id`='$customerId' AND `status`='que'";
+
+
+                $resultO = $this->db->query($sqlO);
+
+                if ($resultO->num_rows == 0) {
+
+                    $orderId = "OD" . $customerName;
+
+
+                    $sqlOO = "INSERT into `Orders` (`orderId`, `cust_id`, `status`, `grandTotal`) VALUES ('$orderId', '$customerId', 'que', 0)";
+
+                    $resultOO = $this->db->query($sqlOO);
+                }
 
 
 
