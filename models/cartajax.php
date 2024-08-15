@@ -7,8 +7,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $host = 'localhost';
-$user = 'debian-sys-maint';
-$pass = 'JbRt9bTnasitZnAJ';
+$user = 'root';
+$pass = 'MyStrongPassword1234$';
 $dbname = 'ShopHere';
 
 // Connect to the database
