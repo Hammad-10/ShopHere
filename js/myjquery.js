@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+    
+
     $("#div1Image").animate({right: '274px'}, 2000);
 
     $("#div2Image").animate({left: '274px'}, 2000);
@@ -29,4 +32,9 @@ $(".productDescription").fadeIn(2000);
 
     // Animation for product section
     $(".product").animate({opacity: 1}, 2000);
+
+
+    $(".remove-item").click(function(){
+        console.log('remove btn clicked');
+    })
 });

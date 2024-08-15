@@ -148,7 +148,7 @@
             <!-- <a class="placeOrderBtn" onclick="placeOrder()">Place Order</a> -->
         </form>
 
-        <a class="placeOrderBtn btn btn-primary mt-3" href="/ptest/ShopHere/views/orderSuccessFailure.html" >Place Order</a>
+        <a class="placeOrderBtn btn btn-primary mt-3" href="/ptest/ShopHere/routes.php?page=placeOrder" >Place Order</a>
         
        
 
@@ -163,7 +163,7 @@
             $subtotal += $row['price']; // Add each product's price to subtotal
         ?>
             <div class="div-1">
-                <h3 class="name"><?php echo $row['product'] ?></h3>
+                <h3 class="name"><?php echo $row['name'] ?></h3>
                 <h6 class="price"><?php echo '$' . number_format($row['price'], 2) ?></h6>
             </div>
         <?php } ?>
@@ -175,7 +175,11 @@
                 <div class="Taxes">Taxes</div>
             </div>
             <div class="price-2">
-                <div class="subtotal-price"><?php echo '$' . number_format($subtotal, 2); ?></div>
+                <div class="subtotal-price"><?php echo '$' . number_format($subtotal, 2); 
+                
+                    $_SESSION['total'] = $subtotal;
+                    
+                    ?></div>
                 <div class="shipping-price">$0.00</div>
                 <div class="Taxes-price">$0.00</div>
             </div>
