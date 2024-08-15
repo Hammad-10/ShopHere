@@ -126,6 +126,7 @@ switch ($page) {
 
 
     default:
+    
         include 'index.html';
         break;
 }
