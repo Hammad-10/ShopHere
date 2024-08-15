@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    console.log('i am here');
+
     
 
     $("#div1Image").animate({right: '274px'}, 2000);

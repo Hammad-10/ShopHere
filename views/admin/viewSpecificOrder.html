@@ -30,13 +30,13 @@
 
 <h2 class="orderDetailsHeading">Order Details</h2>
 
-<h4>Status: <h6>Order dispatched</h6></h4>
+<h4>Status: <h6>Order placed</h6></h4>
 
 <table>
     <thead>
         <tr>
             <th>Product</th>
-            <th>Price</th>
+            <th>Grand Total</th>
             <th>Date</th>
         </tr>
     </thead>
@@ -45,9 +45,9 @@
        
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>" . $row['product'] . "</td>";
-            echo "<td>" . $row['price'] . "</td>";
-            echo "<td>" . $row['datetime'] . "</td>";
+            echo "<td>" . $row['cust_id'] . "</td>";
+            echo "<td>" . $row['grandTotal'] . "</td>";
+            echo "<td>" . $row['dateTime'] . "</td>";
             echo "</tr>";
         }
         ?>

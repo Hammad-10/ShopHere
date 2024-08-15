@@ -28,6 +28,7 @@ switch ($page) {
         (new ProductController())->specificProduct($sno);
         break;
     
+    //admin view specific order
     case 'View_specificOrder':
         $orderId = htmlspecialchars($_GET['orderId']);
         (new ProductController())->specificOrder($orderId);
@@ -126,7 +127,7 @@ switch ($page) {
 
 
     default:
-    
+
         include 'index.html';
         break;
 }
