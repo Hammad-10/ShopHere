@@ -38,8 +38,9 @@
   <div class="product-grid mt-5">
     <div class="container">
       <div class="row">
+        
         <?php while ($row = $result->fetch_assoc()) { 
-        $imagepaths = explode(',', $row['images']); // Split the images into an array
+        $imagepaths = explode(',', $row['image']); // Split the images into an array
         $firstImage = $imagepaths[0]; // Get the first image from the array
         ?>
         <div class="col-md-4">
