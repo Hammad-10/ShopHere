@@ -45,7 +45,7 @@
         ?>
         <div class="col-md-4">
           <div class="product-item">
-            <a href="routes.php?page=Customer_specificProduct&sno=<?php echo urlencode($row['sno']); ?>"
+            <a href="routes.php?page=Customer_specificProduct&sno=<?php echo urlencode($row['sno']); ?>" 
               class="product-link">
               <div class="card mb-4 text-center"> <!-- Added text-center class for horizontal centering -->
                 <div class="card-img-wrapper d-flex justify-content-center align-items-center" style="height: 150px;">
@@ -78,6 +78,7 @@
 
   <!-- miniCart -->
   <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="cartModal"
+
     aria-labelledby="staticBackdropLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="staticBackdropLabel">Cart</h5>
@@ -130,19 +131,22 @@ $firstImage = $imagepaths[0]; // Get the first image from the array
 
 
 
+
   <footer id="footer">
 
     <!-- Copyright -->
   </footer>
 
 
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 
+
   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
-    
+
   <script src="/ptest/ShopHere/js/LoadComponent.js"></script>
 
   <script src="/ptest/ShopHere/js/cartCounter.js"></script>

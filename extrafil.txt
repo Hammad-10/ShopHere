@@ -584,6 +584,427 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 
+
+
+navbar.html:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar Example</title>
+    <!-- <link rel="stylesheet" href="../css/navbar.css"> -->
+
+    <style>
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: black;
+    padding: 1rem;
+    display: flex; /* Ensure the navbar is a flex container */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space out items horizontally */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 10px; /* Adjust margins for spacing */
+    padding: 0;
+    text-align: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.cart-icon {
+    font-size: 1.5rem;
+}
+
+#cart-counter {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0.5rem 1rem;
+    margin-left: 10px;
+    font-size: 1rem;
+    min-width: 1.5rem; /* Ensure minimum width */
+    text-align: center; /* Center text inside the counter */
+    display: inline-block; /* Ensure it behaves like an inline element */
+}
+
+
+
+    </style>
+
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="/ptest/ShopHere/index.html">Home</a></li>
+            <li><a href="/ptest/ShopHere/routes.php?page=showProducts">Shop</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Connect</a></li>
+            <li><a href="/ptest/ShopHere/routes.php?page=customer_logout">logout</a></li>
+            <li><a href="#"  id="cartIcon"   data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop"><i class="cart-icon">🛒</i></a></li>
+        </ul>
+        <span id="cart-counter">0</span>
+    </nav>
+
+    <script src="/ptest/ShopHere/js/cartCounter.js"></script>
+</body>
+
+</html>
+
+
+categoryListing.html:
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/categoryListing.css">
+  <link rel="stylesheet" href="../css/miniCart.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/footer.css">
+
+
+
+  <title>Product Grid</title>
+</head>
+
+<body>
+
+ 
+
+  <div id="navbar">
+
+
+  </div>
+
+  <div class="alertmsg">
+
+  </div>
+
+
+
+
+  <!-- product-grid -->
+  <div class="product-grid mt-5">
+    <div class="container">
+      <div class="row">
+        <?php while ($row = $result->fetch_assoc()) { 
+        $imagepaths = explode(',', $row['images']); // Split the images into an array
+        $firstImage = $imagepaths[0]; // Get the first image from the array
+        ?>
+        <div class="col-md-4">
+          <div class="product-item">
+            <a href="routes.php?page=Customer_specificProduct&sno=<?php echo urlencode($row['sno']); ?>"
+              class="product-link">
+              <div class="card mb-4 text-center"> <!-- Added text-center class for horizontal centering -->
+                <div class="card-img-wrapper d-flex justify-content-center align-items-center" style="height: 150px;">
+                  <!-- Adjust height as needed -->
+                  <img class="productImage" src="<?php echo htmlspecialchars($firstImage); ?>"
+                    style="height: 150px; width: 150px;" alt="<?php echo htmlspecialchars($row['name']); ?>">
+                  <!-- Image centered -->
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title" style="text-decoration: none;">
+                    <?php echo htmlspecialchars($row['name']); ?>
+                  </h5>
+                  <p class="card-text">$
+                    <?php echo htmlspecialchars($row['price']); ?>
+                  </p>
+                  <a href="#" class="btn btn-primary add-to-cart">Add to Cart</a>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <?php } ?>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- miniCart -->
+  <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="cartModal"
+    aria-labelledby="staticBackdropLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="staticBackdropLabel">Cart</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-body">
+          <div id="cartItemsList">
+            <!-- Cart items will be dynamically added here -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btnsDiv"
+      style="display: flex; flex-direction:column; justify-content: space-between; align-self: center;">
+      <a href="/ptest/ShopHere/views/checkout.html" class="checkoutBtn" style="background-color: black;
+      color: white;">Checkout</a>
+      <a href="#" class="continueShopBtn" style="   background-color: white;
+      color: black;
+      border: 1px solid black;">Continue Shopping</a>
+    </div>
+  </div>
+
+
+
+
+  <footer id="footer">
+
+    <!-- Copyright -->
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+
+  <script src="/ptest/ShopHere/js/LoadComponent.js"></script>
+
+  <script src="/ptest/ShopHere/js/cartCounter.js"></script>
+
+  <script src="/ptest/ShopHere/js/addToCart.js"> </script>
+
+ 
+
+
+
+</body>
+
+</html>
+
+addToCart.js:
+
+document.addEventListener("navbarLoaded", () => {
+    const addtocartButtons = document.querySelectorAll('.add-to-cart');
+    const cartIcon = document.getElementById('cartIcon');
+    const cartItemsList = document.getElementById('cartItemsList');
+    const clearCartButton = document.getElementById('clearCartButton');
+    const checkoutButton = document.querySelector('.checkoutBtn');
+    
+    let cartItems = [];
+
+    // Adding items to the cart
+    addtocartButtons.forEach(button => {
+        button.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const productDiv = button.closest('.product-item');
+            if (productDiv) {
+                const imageSrc = productDiv.querySelector('.productImage').src;
+                const title = productDiv.querySelector('.card-title').innerText;
+                const price = productDiv.querySelector('.card-text').innerText.replace('$', '').trim();
+
+                // Check if the item already exists in the cart
+                const itemExists = cartItems.some(item => item.title === title);
+
+                if (!itemExists) {
+                    // If the item is not already in the cart, add it
+                    const item = { imageSrc, title, price };
+                    cartItems.push(item);
+                    updateCart();
+                } else {
+                    showAlert("Item already in cart");
+                }
+            } else {
+                console.error("Product item container not found!");
+            }
+        });
+    });
+
+    cartIcon.addEventListener("click", () => {
+        const cartModal = document.getElementById('cartModal');
+        const bsOffcanvas = new bootstrap.Offcanvas(cartModal);
+        bsOffcanvas.show();
+    });
+
+    clearCartButton?.addEventListener("click", () => {
+        cartItems = [];
+        updateCart();
+    });
+
+    checkoutButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        if (cartItems.length > 0) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/ptest/ShopHere/models/addToCart.php", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log("Order processed successfully.");
+                    window.location.href = "/ptest/ShopHere/routes.php?page=checkout";
+                }
+            };
+
+            const orderData = {
+                cartItems: cartItems
+            };
+            xhr.send(JSON.stringify(orderData));
+        }
+    });
+
+    
+    function updateCart() {
+        cartItemsList.innerHTML = "";
+    
+        cartItems.forEach((item, index) => {
+            const cartItemDiv = document.createElement('div');
+            cartItemDiv.className = 'maindiv mb-3';
+    
+            cartItemDiv.innerHTML = 
+                <div class="imageDiv">
+                    <img alt="${item.title}" class="productImage" src="${item.imageSrc}">
+                </div>
+                <div class="productDetailsdiv">
+                    <h5>${item.title}</h5>
+                    <p><strong>Price:</strong> $${item.price}</p>
+                    <select title="quantity" id="quantity-${index}">
+                        <option value="1">1</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                    <button class="btn btn-danger btn-sm ms-2 remove-item" data-index="${index}">Remove</button>
+                </div>
+            ;
+    
+            cartItemsList.appendChild(cartItemDiv);
+        });
+    
+        // Attach event listener to the parent container using event delegation
+        cartItemsList.addEventListener('click', function (e) {
+            // Check if the clicked element is the remove button
+            if (e.target && e.target.classList.contains('remove-item')) {
+                const index = e.target.getAttribute('data-index');
+                cartItems.splice(index, 1);
+                updateCart(); // Re-render the cart with updated indices
+            }
+    
+            // Handle quantity change if the quantity dropdown is clicked
+            if (e.target && e.target.tagName === 'SELECT' && e.target.title === 'quantity') {
+                const index = e.target.id.split('-')[1];
+                const selectedQuantity = e.target.value;
+                console.log(Quantity for item ${index} changed to ${selectedQuantity});
+                // Implement any logic you need to update the item quantity in cartItems
+            }
+        });
+    }
+    
+
+    function showAlert(message) {
+        // Create the alert element
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-warning alert-dismissible fade show';
+        alertDiv.role = 'alert';
+        alertDiv.innerHTML = 
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        ;
+        
+        // Append the alert to the alertmsg div
+        const alertContainer = document.querySelector('.alertmsg');
+        if (alertContainer) {
+            alertContainer.innerHTML = ""; // Clear any existing alerts
+            alertContainer.appendChild(alertDiv);
+            
+            // Automatically remove the alert after 5 seconds
+            setTimeout(() => {
+                alertDiv.classList.remove('show');
+                alertDiv.classList.add('fade');
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 150);
+            }, 5000);
+        } else {
+            console.error("Alert container not found!");
+        }
+    }
+});
+
+
+
+    public $ProductObj;
+
+    function load($id) {
+                try {
+            // getting sno of the inserted product
+            $sql = "SELECT * from `Products` where `Id`='$id'";
+            $result = $this->db->query($sql);
+
+            if ($result) {
+                $ProductObj = $result->fetch_assoc();
+                return $ProductObj;
+            }
+            
+            // inserting Product images
+
+        } catch (Exception $e) {
+            // Handle the exception
+            echo 'product not found';
+            return false;
+        }
+    }
+
+    function delete(){
+        $id = $this->ProductObj['id'];
+        $sql = "DELETE from `Products` where `Id`='$id'";
+        $result = $this->db->query($sql);
+    }
+
+    function SetData($key,$value){
+        try {
+            $id = $this->ProductObj['id'];
+            $sql = "UPDATE Products SET $key = ? WHERE sno = ?";
+            $stmt = $this->db->prepare($sql);
+
+            if (!$stmt) {
+                throw new Exception("Prepare statement failed: " . $this->db->error);
+            }
+
+            $stmt->bind_param('ssiii', $value, $id);
+
+            if (!$stmt->execute()) {
+                throw new Exception("Execute failed: " . $stmt->error);
+            }
+
+            return true;
+        } catch (Exception $e) {
+            // Handle the exception
+            echo 'An error occurred while updating the product: ' . $e->getMessage();
+            return false;
+        }
+    }
+
     
 document.ready(function(){
     console.log('document is ready');
