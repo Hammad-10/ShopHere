@@ -32,8 +32,11 @@ class customerLogin extends Database
                 $row = $result->fetch_assoc();
                 // session_start();
                 $customerId = $row['customerId'];
+                $customerName = $row['customerName'];
 
                 $_SESSION['customerId'] = $customerId;
+                $_SESSION['customerName'] = $customerName;
+
 
 
                 $sqlO = "SELECT * FROM `Orders` WHERE `cust_id`='$customerId' AND `status`='que'";

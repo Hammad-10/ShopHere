@@ -96,6 +96,7 @@ switch ($page) {
 
     
     case 'cartajax':
+    
         (new Cartajax())->cartAjax();
         break;
 
@@ -143,7 +144,9 @@ switch ($page) {
         break;
 
     case 'placeOrder':
+      
         (new Product())->updateOrders();
+        (new Product())->createAnotherOrder();
         include '/var/www/html/ptest/ShopHere/views/orderSuccessFailure.html';
         break;
 

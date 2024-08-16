@@ -214,6 +214,7 @@ class ProductController
                 $_SESSION['images'] = $result['images'];
                 // echo $_SESSION['sku'];
 
+                $orderitems = (new Product())->getOrderItems();
                 // i am here now just take data to customer/Product.html
                 include '/var/www/html/ptest/ShopHere/views/Product.html';
                 
