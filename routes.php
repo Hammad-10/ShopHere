@@ -99,6 +99,11 @@ switch ($page) {
         (new Cartajax())->cartAjax();
         break;
 
+   
+    case 'removeCartItem':
+        (new Cartajax())->removeCartItem();
+        break;
+
     case 'admin_logout':
         (new AuthController())->adminLogout();
         break;
