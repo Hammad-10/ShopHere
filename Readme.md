@@ -9,7 +9,7 @@ Welcome to the Online Shopping Site project! This repository contains the code f
 - **Customer Management**: Handle customer registration, login, and profile management.
 - **Shopping Cart**: Add, remove, and update products in the shopping cart.
 - **Order Management**: Process orders and manage order history.
-- **Admin Panel**: Manage products, categories, and customer data from an admin interface.
+- **Admin Panel**: Manage products, categories, and customer data from an admin interface, view customers and view orders.
 - **Responsive Design**: Optimized for various screen sizes.
 
 ## Installation
@@ -18,7 +18,7 @@ To get started with the project, follow these steps:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/online-shopping-site.git
+    git clone https://github.com/Hammad-10/ShopHere.git
     cd online-shopping-site
     ```
 
