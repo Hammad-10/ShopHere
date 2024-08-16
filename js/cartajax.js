@@ -41,7 +41,7 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
 
 // Function to attach event listeners to remove-item buttons
 function attachRemoveItemListeners() {
-    document.querySelectorAll('.remove-item').forEach(button => {
+    document.getElementById('remove-item').forEach(button => {
         button.addEventListener('click', function(event) {
             console.log('Remove button clicked');
             let index = event.target.getAttribute('data-index');
