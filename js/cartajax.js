@@ -23,7 +23,7 @@ document.querySelectorAll('.add-to-cart').forEach(button => {
                 alert('Product added to cart successfully!');
                 // Optionally update cart content dynamically here
                 // If the cart content is updated dynamically, make sure to re-attach the event listener to the new remove-item buttons
-                attachRemoveItemListeners(); // Re-attach listeners to any new remove-item buttons
+                // Re-attach listeners to any new remove-item buttons
             } else {
                 alert('Something went wrong.');
             }
