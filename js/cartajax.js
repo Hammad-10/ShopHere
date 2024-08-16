@@ -93,10 +93,38 @@ document.addEventListener("navbarLoaded", () => {
             // removeButtons.forEach(button => {
                 removeButtons.addEventListener('click', function(event) {
                     console.log('Remove button clicked');
-                    let index = event.target.getAttribute('data-index');
+                    let product_sno = event.target.getAttribute('data-index');
+
+                    const xhr = new XMLHttpRequest();
+
+                    // Open the POST request
+                    xhr.open('POST', '/ptest/ShopHere/routes.php?page=removeCartItem', true);
+                    xhr.setRequestHeader('Content-type', 'application/json');
+            
+                    // Defining the response handling
+                    xhr.onload = function() {
+                        console.log('Request returned successfully');
+                        if (this.status === 200) {
+                            console.log('Product deleted from cart successfully!');
+                            alert('Item removed from cart');
+                            // Optionally update cart content dynamically here
+                            // If the cart content is updated dynamically, make sure to re-attach the event listener to the new remove-item buttons
+                            // attachRemoveItemListeners(); // Re-attach listeners to any new remove-item buttons
+                        } else {
+                            alert('Something went wrong.');
+                        }
+                    };
+            
+                    let params = JSON.stringify({
+                        product_sno: product_sno,
+                    });
+            
+                    xhr.send(params);
 
                     // Handle the removal process here
-                    alert('Item removed from cart: ' + index);
+                    
+
+
 
                     // Optionally remove the item from the DOM
                     // event.target.closest('.productDetailsdiv').remove();

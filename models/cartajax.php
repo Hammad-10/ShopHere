@@ -56,4 +56,26 @@ class Cartajax extends Database
             }
         }
     }
+
+    public function removeCartItem(){
+
+        $json = file_get_contents('php://input');
+
+        // Decode the JSON data
+        $data = json_decode($json, true);
+
+        $product_sno = $data['product_sno'];
+
+        $sql = "DELETE from `OrderItems` where `product_sno`='$product_sno'";
+        $result = $this->db->query($sql);
+
+        if ($result) {
+            // Send a success response
+            echo json_encode(['status' => 'success', 'message' => 'Product added to cart']);
+        } else {
+            // Send an error response
+            echo json_encode(['status' => 'error', 'message' => 'Failed to add product to cart']);
+        }
+
+    }
 }
