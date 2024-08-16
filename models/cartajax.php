@@ -43,6 +43,8 @@ class Cartajax extends Database
             $quantity = $data['quantity'];
             $productprice = $data['productprice'];
 
+       
+
             // Construct the SQL query to insert the cart item
             $sql = "INSERT INTO OrderItems (order_sno, product_sno, quantity, subtotal) VALUES ('$order_sno', '$productsno', '$quantity', '$productprice')";
             $result = $this->db->query($sql);

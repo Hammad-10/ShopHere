@@ -693,4 +693,27 @@ class Product extends Database
         $result1 = $this->db->query($sql1);
 
     }
+
+    public function createAnotherOrder(){
+      
+      $customerId =  $_SESSION['customerId'];
+      $customerName =  $_SESSION['customerName'];
+
+
+        $sqlO = "SELECT * FROM `Orders` WHERE `cust_id`='$customerId' AND `status`='que'";
+
+
+        $resultO = $this->db->query($sqlO);
+
+        if ($resultO->num_rows == 0) {
+ 
+
+            $orderId = "OD" . $customerName;
+
+
+            $sqlOO = "INSERT into `Orders` (`orderId`, `cust_id`, `status`, `grandTotal`) VALUES ('$orderId', '$customerId', 'que', 0)";
+
+            $resultOO = $this->db->query($sqlOO);
+        }
+    }
 }
