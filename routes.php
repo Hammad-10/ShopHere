@@ -7,6 +7,7 @@ require 'models/Login.php';
 require 'models/Signup.php';
 require 'models/customerLogin.php';
 require 'models/customerSignup.php';
+require 'models/cartajax.php';
 
 require 'controllers/ProductController.php';
 require 'controllers/AuthController.php';
@@ -91,6 +92,11 @@ switch ($page) {
         $orderitems = (new Product())->getOrderItems();
         $result = (new ProductController())->showProducts();
         include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
+        break;
+
+    
+    case 'cartajax':
+        (new Cartajax())->cartAjax();
         break;
 
     case 'admin_logout':
