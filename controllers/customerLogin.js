@@ -17,13 +17,10 @@ function buttonClickHandler(event) {
     xhr.onload = function () {
         if (this.status === 200) {
             console.log(this.responseText);
-            let response = JSON.parse(this.responseText);
-            if (response.status === 'success') {
+
                 // Redirect to login page
                 window.location.href = '/ptest/ShopHere/routes.php?page=index';
-            } else {
-                console.log(response.message);
-            }
+        
         } else {
             console.log("Some error occurred");
         }

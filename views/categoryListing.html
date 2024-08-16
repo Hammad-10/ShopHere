@@ -38,7 +38,7 @@
   <div class="product-grid mt-5">
     <div class="container">
       <div class="row">
-        
+
         <?php while ($row = $result->fetch_assoc()) { 
         $imagepaths = explode(',', $row['image']); // Split the images into an array
         $firstImage = $imagepaths[0]; // Get the first image from the array
@@ -84,9 +84,7 @@
       <h5 class="offcanvas-title" id="staticBackdropLabel">Cart</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-body">
+
           <div id="cartItemsList">
 
             <!-- Cart items will be dynamically added here -->
@@ -107,27 +105,32 @@ $firstImage = $imagepaths[0]; // Get the first image from the array
               <select title="quantity" id="quantity-<?php echo $index; ?>">
                 <option value="1">1</option>
               </select>
-              <button class="btn btn-danger btn-sm ms-2 remove-item" id=" remove-item" data-index="<?php echo $index; ?>">Remove</button>
+
+              <button class="btn btn-danger btn-sm ms-2 " id="remove-item" data-index=" <?php echo $row['product_sno']; ?>">Remove</button>
+              
             </div>
             <?php } ?>
           </div>
+
+          <div class="btnsDiv"
+          style="display: flex; flex-direction:column; justify-content: space-between; align-self: center;">
+          <a href="/ptest/ShopHere/routes.php?page=checkout" class="checkoutBtn" style="background-color: black;
+        color: white;">Checkout</a>
+          <a href="#" class="continueShopBtn" style="background-color: white;
+        color: black;
+        border: 1px solid black;">Continue Shopping</a>
         </div>
-      </div>
-    </div>
-    <div class="btnsDiv"
-      style="display: flex; flex-direction:column; justify-content: space-between; align-self: center;">
-      <a href="/ptest/ShopHere/routes.php?page=checkout" class="checkoutBtn" style="background-color: black;
-    color: white;">Checkout</a>
-      <a href="#" class="continueShopBtn" style="background-color: white;
-    color: black;
-    border: 1px solid black;">Continue Shopping</a>
-    </div>
-  </div>
+        
+        </div>
+      
+
+   
+ 
+  
 
 
-
-
-
+   
+ 
   <footer id="footer">
 
     <!-- Copyright -->
@@ -140,6 +143,8 @@ $firstImage = $imagepaths[0]; // Get the first image from the array
     crossorigin="anonymous"></script>
 
 
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
 
   <script src="/ptest/ShopHere/js/LoadComponent.js"></script>
 
@@ -149,7 +154,7 @@ $firstImage = $imagepaths[0]; // Get the first image from the array
 
   <script src="/ptest/ShopHere/js/cartajax.js"></script>
 
-  
+
 
 
 

@@ -7,6 +7,7 @@ require 'models/Login.php';
 require 'models/Signup.php';
 require 'models/customerLogin.php';
 require 'models/customerSignup.php';
+require 'models/cartajax.php';
 
 require 'controllers/ProductController.php';
 require 'controllers/AuthController.php';
@@ -58,9 +59,10 @@ switch ($page) {
 
         // customer view products category wise   
     case 'productCategWiseCustomer':
-        $orderitems = (new Product())->getOrderItems();
+       
         $categId = htmlspecialchars($_GET['categoryId']);
         $categName = htmlspecialchars($_GET['categoryName']);
+        $orderitems = (new Product())->getOrderItems();
         $result = (new ProductController())->productCategWiseCustomer($categId, $categName);
         include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
 
@@ -90,6 +92,16 @@ switch ($page) {
         $orderitems = (new Product())->getOrderItems();
         $result = (new ProductController())->showProducts();
         include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
+        break;
+
+    
+    case 'cartajax':
+        (new Cartajax())->cartAjax();
+        break;
+
+   
+    case 'removeCartItem':
+        (new Cartajax())->removeCartItem();
         break;
 
     case 'admin_logout':
