@@ -86,13 +86,13 @@ class ProductController
             $this->productModel->newCategory($categName);
 
             $categories = $this->productModel->displayCategories();
-            include '/var/www/html/ptest/ShopHere/views/admin/categories.html';
+            include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
             
         }
 
         else{
             $categories = $this->productModel->displayCategories();
-            include '/var/www/html/ptest/ShopHere/views/admin/categories.html';
+            include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
         }
 
     }
@@ -187,7 +187,8 @@ class ProductController
     {
         try {
             $result = $this->productModel->displaySpecificOrder($orderId);
-            include '/var/www/html/ptest/ShopHere/views/admin/viewSpecificOrder.html';
+            include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\viewSpecificOrder.html';
+            
            
         } catch (Exception $e) {
             // Handle the exception
@@ -215,8 +216,11 @@ class ProductController
                 // echo $_SESSION['sku'];
 
                 $orderitems = (new Product())->getOrderItems();
+                
                 // i am here now just take data to customer/Product.html
-                include '/var/www/html/ptest/ShopHere/views/Product.html';
+                include 'C:\xampp\htdocs\ptest\ShopHere\views\Product.html';
+
+                // include '/var/www/html/ptest/ShopHere/views/Product.html';
                 
                 // header('Location: /ptest/ShopHere/views/');
                 exit();

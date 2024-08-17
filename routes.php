@@ -18,7 +18,7 @@ switch ($page) {
 
     case 'adminDashboard':
         $categories = (new Product())->displayCategories();
-        include '/var/www/html/ptest/ShopHere/views/admin/adminDashboard.html';
+        include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\adminDashboard.html';
         break;
 
     case 'insertProduct':
@@ -47,7 +47,7 @@ switch ($page) {
 
     case 'categories':
         $categories = (new Product())->displayCategories();
-        include '/var/www/html/ptest/ShopHere/views/admin/categories.html';
+        include 'C:\xampp\htdocs\ptest\ShopHere\views\admin\categories.html';
         break;
 
         // admin view products category wise   
@@ -64,7 +64,9 @@ switch ($page) {
         $categName = htmlspecialchars($_GET['categoryName']);
         $orderitems = (new Product())->getOrderItems();
         $result = (new ProductController())->productCategWiseCustomer($categId, $categName);
-        include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
+        include 'C:\xampp\htdocs\ptest\ShopHere\views\categoryListing.html';
+
+        // include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
 
         break;
 
@@ -91,7 +93,7 @@ switch ($page) {
 
         $orderitems = (new Product())->getOrderItems();
         $result = (new ProductController())->showProducts();
-        include '/var/www/html/ptest/ShopHere/views/categoryListing.html';
+        include 'C:\xampp\htdocs\ptest\ShopHere\views\categoryListing.html';
         break;
 
     
@@ -140,14 +142,14 @@ switch ($page) {
 
     case 'checkout':
         $orders = (new Product())->checkoutOrdersInfo();
-        include '/var/www/html/ptest/ShopHere/views/checkout.html';
+        include 'C:\xampp\htdocs\ptest\ShopHere\views\checkout.html';
         break;
 
     case 'placeOrder':
       
         (new Product())->updateOrders();
         (new Product())->createAnotherOrder();
-        include '/var/www/html/ptest/ShopHere/views/orderSuccessFailure.html';
+        include 'C:\xampp\htdocs\ptest\ShopHere\views\orderSuccessFailure.html';
         break;
 
 

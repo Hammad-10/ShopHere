@@ -13,10 +13,10 @@ public function adminLogin(){
         $data = json_decode($json, true);
     
         // Extract username and password from the decoded data
-        $adminId = $data['adminId'];
+        $adminName = $data['adminName'];
         $adminPassword = $data['adminPassword'];
     
-        $sql = "SELECT * FROM Admin WHERE adminId='$adminId' AND adminPassword='$adminPassword'";
+        $sql = "SELECT * FROM Admin WHERE adminName='$adminName' AND adminPassword='$adminPassword'";
 
         $result = $this->db->query($sql);
     

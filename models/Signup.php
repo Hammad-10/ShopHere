@@ -14,12 +14,12 @@ public function adminSignup(){
         $data = json_decode($json, true);
     
         // Extract username and password from the decoded data
-        $adminId = $data['adminId'];
+       
         $adminName = $data['adminName'];
         $adminPassword = $data['adminPassword'];
     
         // Construct the SQL query to insert the new user
-        $sql = "INSERT INTO Admin (adminId, adminName, adminPassword) VALUES ('$adminId', '$adminName', '$adminPassword')";
+        $sql = "INSERT INTO Admin (adminName, adminPassword) VALUES ('$adminName', '$adminPassword')";
     
         // Execute the SQL query
         $result = $this->db->query($sql);
