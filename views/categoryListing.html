@@ -103,8 +103,8 @@ $firstImage = $imagepaths[0]; // Get the first image from the array
                 <?php echo $row['price']; ?>
               </p>
               <select title="quantity" id="quantity-<?php echo $index; ?>">
-                <option value="1">1</option>
-              </select>
+                <option value="<?php echo $row['quantity']; ?>"><?php echo $row['quantity']; ?></option>
+            </select>
 
               <button class="btn btn-danger btn-sm ms-2 " id="remove-item" data-index=" <?php echo $row['product_sno']; ?>">Remove</button>
               

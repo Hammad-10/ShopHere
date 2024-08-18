@@ -5,6 +5,8 @@ $(document).ready(function(){
 
         console.log('Add to Cart button clicked');
 
+        
+
         let productsno = event.target.getAttribute('data-product-sno');
         let productprice = event.target.getAttribute('data-product-price');
 

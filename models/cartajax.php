@@ -43,9 +43,28 @@ class Cartajax extends Database
             $quantity = $data['quantity'];
             $productprice = $data['productprice'];
 
+
+            // update the quantity of the product if it is already added in the cart
+            $sql1 = "SELECT * from `OrderItems` where `product_sno`='$productsno'";
+            $result1 = $this->db->query($sql1);
+            $row1 = $result1->fetch_assoc();
+
+          
+
+
+            if($result1->num_rows > 0){
+
+                $subtotal = $row1['subtotal'];
+                $quantityU = $row1['quantity'];
+
+                $sqlUpdate = "UPDATE `OrderItems` SET `quantity` = " . ($quantityU + 1) . ", `subtotal` = ".($subtotal+$productprice)." WHERE `product_sno` = '$productsno'";
+                $resultUpdate = $this->db->query($sqlUpdate);
+            }
+            
+
        
 
-            // Construct the SQL query to insert the cart item
+            // query to insert the cart item
             $sql = "INSERT INTO OrderItems (order_sno, product_sno, quantity, subtotal) VALUES ('$order_sno', '$productsno', '$quantity', '$productprice')";
             $result = $this->db->query($sql);
 

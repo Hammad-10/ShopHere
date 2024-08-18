@@ -161,11 +161,11 @@
         $subtotal = 0; // Initialize subtotal
 
         while ($row = $orders->fetch_assoc()) { 
-            $subtotal += $row['price']; // Add each product's price to subtotal
+            $subtotal += $row['subtotal']; // Add each product's price to subtotal
         ?>
             <div class="div-1">
                 <h3 class="name"><?php echo $row['name'] ?></h3>
-                <h6 class="price"><?php echo '$' . number_format($row['price'], 2) ?></h6>
+                <h6 class="price"><?php echo '$' . number_format($row['subtotal'], 2) ?></h6>
             </div>
         <?php } ?>
         <hr>
