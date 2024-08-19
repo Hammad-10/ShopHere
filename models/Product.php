@@ -686,7 +686,7 @@ class Product extends Database
         $cust_id = $_SESSION['customerId'];
         $total = $_SESSION['total'];
 
-        $sql = "UPDATE `Orders` set `status`='placed', `grandTotal` = '$total' where `cust_id`='$cust_id'";
+        $sql = "UPDATE `Orders` set `status`='placed', `grandTotal` = '$total' where `cust_id`='$cust_id' and `status`='que'";
         $result = $this->db->query($sql);
 
         $sql1 = "DELETE from `OrderItems`";
