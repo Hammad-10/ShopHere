@@ -2,15 +2,15 @@
 
 class Database
 {
-    private $host = 'localhost';
-    private $user = 'root';
-    private $pass = 'MyStrongPassword1234$';
-    private $dbname = 'ShopHere';
-    
     // private $host = 'localhost';
-    // private $user = 'debian-sys-maint';
-    // private $pass = 'JbRt9bTnasitZnAJ';
+    // private $user = 'root';
+    // private $pass = 'MyStrongPassword1234$';
     // private $dbname = 'ShopHere';
+    
+    private $host = 'localhost';
+    private $user = 'debian-sys-maint';
+    private $pass = 'JbRt9bTnasitZnAJ';
+    private $dbname = 'ShopHere';
 
     public $db ;
     
