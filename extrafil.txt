@@ -1204,3 +1204,28 @@ $firstImage = $imagepaths[0]; // Get the first image from the array
 </body>
 
 </html>
+
+
+--Code for product--
+
+        <?php 
+        $imagepaths = explode(',', $_SESSION['images']); // Split the images into an array
+        
+        $firstImage = '';
+        $secondImage = '';
+        $thirdImage = '';
+        
+        $length = count($imagepaths);
+        
+        for($i = 0; $i < $length; $i++){
+            if($i == 0){
+                $firstImage = $imagepaths[$i]; // Get the first image from the array
+            }
+            else if($i == 1){
+                $secondImage = $imagepaths[$i]; // Get the second image from the array
+            }
+            else if($i == 2){
+                $thirdImage = $imagepaths[$i]; // Get the third image from the array
+            }
+        }
+        ?>
