@@ -1,205 +1,161 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- <link rel="stylesheet" href="../css/checkout.css"> -->
     <title>Checkout</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <style>
-        .badadiv 
-{
-  display: flex;
-  flex-direction: row;
-  height: 1080px;
-  width: 1920px;
-}
-.subdiv-1
-{
-    width: 60%;
-}
-.subdiv-2
-{
-    width: 40%;
-    background-color: rgb(238, 238, 238);
-    height: 100%;
-}
+        .badadiv {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
 
-.placeOrderBtn
-{
-    margin-left: 500px;
-    background-color: rgb(28, 140, 245);
-    color: white;
-    border: none;
-    border-radius: 9px;
-    padding: 18px;
-    font-size: medium;
+        .subdiv-1 {
+            width: 60%;
+            padding: 30px;
+        }
 
-}
-.img 
-{
-    width: 100px;
-    height: 80px;
-    margin-top: 16px;
-    margin-left: 45px;
-}
+        .subdiv-2 {
+            width: 40%;
+            background-color: rgb(248, 249, 250);
+            padding: 30px;
+            box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
+        }
 
-.div-1 
-{
-    display: flex;
-    flex-direction: row;
-}
+        .placeOrderBtn {
+            margin-top: 20px;
+            background-color: rgb(28, 140, 245);
+            color: white;
+            border: none;
+            border-radius: 9px;
+            padding: 15px 30px;
+            font-size: large;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
 
-.name 
-{
-    margin-left: 45px;
-    margin-top: 36px;
+        .div-1 {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
 
-    
-}
+        .div-2 {
+            margin-top: 30px;
+        }
 
-.price
-{
-    margin-left: 40px;
-    margin-top: 36px;
+        .div-2 .title {
+            margin-bottom: 10px;
+        }
 
-}
+        .div-3 {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
 
-.div-2
-{
-    display: flex;
-    flex-direction:row;
-    margin-top: 30px;
-}
-.title
-{
-    margin-right: 80px;
-    margin-left: 46px;
-}
-.price-2
-{
-    margin-left: 230px;
+        .box-1 {
+            height: 40px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            padding: 5px 10px;
+        }
 
-}
-.div-3
-{
-    display: flex;
-    flex-direction: row;
-
-}
-
-.box-1
-{
-    width: 100px;
-    height: auto;
-    margin-left: 40px;
-}
-.code-Btn
-{
-    margin-left: 50px;
-    background-color: rgb(0, 183, 255);
-    border: none;
-    border-radius: 9px;
-    padding: 12px;
-    font-size: medium;
-}
-.box-1
-{
-    height: 40px;
-    width: 140px;
-    border-radius: 10px;
-}
-
+        .code-Btn {
+            margin-left: 10px;
+            background-color: rgb(0, 183, 255);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: medium;
+            color: white;
+        }
     </style>
 </head>
+
 <body>
-<div class="badadiv">
-    <div class="subdiv-1">
-        <h2 class="checkoutHeading">Place Order</h2>
-        <p class="checkoutdesc">
-            Please verify your details and place your order by clicking the button here.
-        </p>
+    <div class="badadiv">
+        <div class="subdiv-1">
+            <h2 class="checkoutHeading">Place Order</h2>
+            <p class="checkoutdesc">
+                Please verify your details and place your order by clicking the button here.
+            </p>
 
-        <!-- shipping details form -->
-        <form id="shippingForm" class="container mt-4">
-            <div class="form-group">
-                <label for="customerName" class="form-label">Customer Name:</label>
-                <input type="text" id="customerName" name="customerName" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="address" class="form-label">Address:</label>
-                <input type="text" id="address" name="address" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="phone" class="form-label">Phone:</label>
-                <input type="text" id="phone" name="phone" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="paymentMethod" class="form-label">Payment Method:</label>
-                <select id="paymentMethod" name="paymentMethod" class="form-select" required>
-                    <option value="easypaisa">EasyPaisa</option>
-                    <option value="jazzcash">JazzCash</option>
-                    <option value="cod">Cash on Delivery</option>
-                </select>
-            </div>
-            <!-- <button type="submit" class="placeOrderBtn btn btn-primary mt-3" onclick="placeOrder()">Place Order</button> -->
-            <!-- <a class="placeOrderBtn" onclick="placeOrder()">Place Order</a> -->
-        </form>
+            <!-- shipping details form -->
+            <form id="shippingForm" class="container mt-4">
+                <div class="form-group">
+                    <label for="customerName" class="form-label">Customer Name:</label>
+                    <input type="text" id="customerName" name="customerName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="address" class="form-label">Address:</label>
+                    <input type="text" id="address" name="address" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone:</label>
+                    <input type="text" id="phone" name="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="paymentMethod" class="form-label">Payment Method:</label>
+                    <select id="paymentMethod" name="paymentMethod" class="form-control" required>
+                        <option value="easypaisa">EasyPaisa</option>
+                        <option value="jazzcash">JazzCash</option>
+                        <option value="cod">Cash on Delivery</option>
+                    </select>
+                </div>
+            </form>
 
-        <a class="placeOrderBtn btn btn-primary mt-3" href="/ptest/ShopHere/routes.php?page=placeOrder" >Place Order</a>
-        
-       
+            <a class="placeOrderBtn btn btn-primary mt-3" href="/ptest/ShopHere/routes.php?page=placeOrder">Place Order</a>
+        </div>
+        <div class="subdiv-2">
+            <?php 
+                $subtotal = 0; // Initialize subtotal
 
-
-        <!-- <a class="placeOrderBtn" onclick="placeOrder()">Place Order</a> -->
-    </div>
-    <div class="subdiv-2">
-        <?php 
-        $subtotal = 0; // Initialize subtotal
-
-        while ($row = $orders->fetch_assoc()) { 
-            $subtotal += $row['subtotal']; // Add each product's price to subtotal
-        ?>
+                while ($row = $orders->fetch_assoc()) { 
+                    $subtotal += $row['subtotal']; // Add each product's price to subtotal
+            ?>
             <div class="div-1">
-                <h3 class="name"><?php echo $row['name'] ?></h3>
+                <h5 class="name"><?php echo $row['name'] ?></h5>
                 <h6 class="price"><?php echo '$' . number_format($row['subtotal'], 2) ?></h6>
             </div>
-        <?php } ?>
-        <hr>
-        <div class="div-2">
-            <div class="title">
-                <div class="subtotal">SubTotal</div>
-                <div class="shipping">Shipping</div>
-                <div class="Taxes">Taxes</div>
+            <?php } ?>
+            <hr>
+            <div class="div-2">
+                <div class="d-flex justify-content-between">
+                    <span>SubTotal</span>
+                    <span><?php echo '$' . number_format($subtotal, 2); 
+                        $_SESSION['total'] = $subtotal;
+                    ?></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Shipping</span>
+                    <span>$0.00</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Taxes</span>
+                    <span>$0.00</span>
+                </div>
             </div>
-            <div class="price-2">
-                <div class="subtotal-price"><?php echo '$' . number_format($subtotal, 2); 
-                
-                    $_SESSION['total'] = $subtotal;
-                    
-                    ?></div>
-                <div class="shipping-price">$0.00</div>
-                <div class="Taxes-price">$0.00</div>
-            </div>
-        </div>
-        <hr>
-        <div class="div-3">
-            <div class="box">
-                <input type="text" placeholder="code" class="box-1">
-            </div>  
-            <div class="code-btn">
+            <hr>
+            <div class="div-3">
+                <input type="text" placeholder="Enter discount code" class="box-1">
                 <button class="code-Btn">Apply</button>
             </div>
         </div>
     </div>
-</div>
 
-
-
-
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT7jRLt7q4YZk/wZfN7mtTMR5rY4uHHmh60wqx3EN6bb4J8v5J" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-B4yU2bXHhPp5n3jtMr6J1kqqsNUlJJ9kbZ/V4Yjw5xwK5t6B6II4tQbR6bT2dm4W" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-Gfge+xiQENy/nZZuTw/7JoTsdjYfOORaG7RQkAaK3AY0sb9y0qklGkAWtjs6VdKn" crossorigin="anonymous"></script>
 </body>
-</html>
 
+</html>
